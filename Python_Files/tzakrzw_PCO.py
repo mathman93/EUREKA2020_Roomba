@@ -52,7 +52,7 @@ class Node():
 
 # ---- Init ----
 #Create ossilator
-PCO = Node(uniform(0,Node.period))) #Just give a random intial phase
+PCO = Node(uniform(0,Node.period)) #Just give a random intial phase
 
 #Copy from Xbee_Read_Test.py to begin serial comunciation
 global Xbee # Specifies connection to Xbee
@@ -69,6 +69,7 @@ while True:
     #Check to see if rx a pulse
     if Xbee.inWaiting() > 0:
         message = Xbee.read(Xbee.inWaiting()).decode()
+        print('rx')
         #Note - this will read all the pulses send to the serial port since the last
         #call of the loop, which maybe more than one. However, since their the refraction
         #period is greater than the time for a single loop to execute, this should be negliable
