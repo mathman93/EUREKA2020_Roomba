@@ -80,7 +80,7 @@ while True:
 
     #Finially, change the current_time to the last_time and print the phase
     last_time = copy(current_time)
-    print(PCO.phase())
+    #print(PCO.phase())
 
     
     
