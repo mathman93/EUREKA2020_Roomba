@@ -27,7 +27,7 @@ class Node():
         if self.val >= self.period:
             if ping: print('ping')
             #Send out signal to other xbees
-            Xbee.write(str(self.phase()).encode())
+            Xbee.write(str(current_time).encode())
             #Reset value
             self.val = 0
             return True
