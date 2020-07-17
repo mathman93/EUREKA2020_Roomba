@@ -38,7 +38,7 @@ class Node():
             return False
         #Use that value with the phase response equation to update end value
         self.val += self.strength * self.function()
-        elif self.val => self.period:
+        if self.val => self.period:
             print('Over Shot')
             self.val = self.period
             self.pulse()
