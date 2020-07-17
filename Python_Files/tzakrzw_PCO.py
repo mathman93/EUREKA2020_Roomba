@@ -27,7 +27,7 @@ class Node():
         if self.val >= self.period:
             if ping: print('ping')
             #Send out signal to other xbees
-            Xbee.write('1'.encode())
+            Xbee.write(str(self.phase).encode())
             #Reset value
             self.val = 0
             return True
@@ -69,7 +69,7 @@ while True:
     #Check to see if rx a pulse
     if Xbee.inWaiting() > 0:
         message = Xbee.read(Xbee.inWaiting()).decode()
-        print('rx')
+        print(message)
         #Note - this will read all the pulses send to the serial port since the last
         #call of the loop, which maybe more than one. However, since their the refraction
         #period is greater than the time for a single loop to execute, this should be negliable
