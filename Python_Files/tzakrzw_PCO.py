@@ -12,10 +12,10 @@ def wang_op_simple(self):
 #Object used to define the ossilator behavior
 class Node():
 
-    period = 10 #Time in seconds for each phase
+    period = 1 #Time in seconds for each phase
     function = wang_op_simple #Function used to change phase value
     strength = 1 #Coe used with function to determine coupling strength?
-    refract = 4 #Time before receive more signals
+    refract = .4 #Time before receive more signals
 
     def __init__(self, inital):
         self.val = inital #The value of the ossilator
