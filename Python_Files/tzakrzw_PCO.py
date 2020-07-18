@@ -60,25 +60,32 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 # ---- Main Loop ----
 last_time = time.time()
 while True:
-    current_time = time.time()
-    dt = current_time - last_time #Change in time since last call
-    PCO.val += dt #Update PCO value
-    
-    #Check to see if rx a pulse
-    if Xbee.inWaiting() > 0:
-        message = Xbee.read(Xbee.inWaiting()).decode()
-        print(message)
-        #Note - this will read all the pulses send to the serial port since the last
-        #call of the loop, which maybe more than one. However, since their the refraction
-        #period is greater than the time for a single loop to execute, this should be negliable
-        PCO.change_phase()
+    try:
+        current_time = time.time()
+        dt = current_time - last_time #Change in time since last call
+        PCO.val += dt #Update PCO value
+        
+        #Check to see if rx a pulse
+        if Xbee.inWaiting() > 0:
+            message = Xbee.read(Xbee.inWaiting()).decode()
+            print(message)
+            #Note - this will read all the pulses send to the serial port since the last
+            #call of the loop, which maybe more than one. However, since their the refraction
+            #period is greater than the time for a single loop to execute, this should be negliable
+            PCO.change_phase()
 
-    #Check nodes to see if an nodes need to fire
-    PCO.pulse()
+        #Check nodes to see if an nodes need to fire
+        PCO.pulse()
 
-    #Finially, change the current_time to the last_time and print the phase
-    last_time = copy(current_time)
-    #print(PCO.phase())
+        #Finially, change the current_time to the last_time and print the phase
+        last_time = copy(current_time)
+        #print(PCO.phase())
+
+    except KeyboardInterrupt:
+        print('This is the end')
+        break
+
+Xbee.close()
 
     
     
