@@ -13,7 +13,7 @@ import serial
 global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 #Starting phase angle
-nodephase = input(int("Please enter a number between 0 and 360: "))
+nodephase = int(input("Please enter a starting phase value: "))
 threshold = 360
 
 ## Main Code ##
