@@ -3,7 +3,7 @@ import time
 import random
 
 global Xbee
-Xbee = serial.Serial('/dev/ttyUSB0/', 115200)
+Xbee = serial.Serial('/dev/ttyUSB0', 115200)
 
 sendTime = time.time()
 phase = random.randint(0,3)
