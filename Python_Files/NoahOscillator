@@ -7,15 +7,16 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200)
 
 phase = random.randint(0,2)
 threshold = 360
-sendTime = 0
+sendTime = time.time()
 
 while True:
 
 	try:
-		if phase < threshold:
-			currentTime = time.time()
-			timeDifference = currentTime - sendTime
-			phase += timeDifference
+	
+		currentTime = time.time()
+		timeDifference = currentTime - sendTime
+		phase += timeDifference
+		print(phase)
 
 		if phase >= threshold:
 			phase = 0
