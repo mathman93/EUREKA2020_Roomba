@@ -19,7 +19,7 @@ class Node():
 
     period = 1 #Time in seconds for each phase
     function = wang_op_simple #Function used to change phase value
-    strength = 1 #Coe used with function to determine coupling strength?
+    strength = .5 #Coe used with function to determine coupling strength?
     refract = .4 #Time before receive more signals
 
     def __init__(self, inital):
