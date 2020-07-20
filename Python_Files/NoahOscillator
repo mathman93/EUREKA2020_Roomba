@@ -32,7 +32,7 @@ while True:
 			print(message)
 			if phase > 0 and phase <= 180:
 					phase -= timeDifference
-			if phase > 180 and phase <= threshold
+			if phase > 180 and phase <= threshold:
 				phase += timeDifference
 
 	except KeyboardInterrupt:
