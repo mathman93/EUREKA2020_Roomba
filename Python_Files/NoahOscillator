@@ -13,10 +13,9 @@ while True:
 	sendTime = time.time()
 
 	try:
-		currentTime = time.time()
-		timeDifference = currentTime - sendTime
-		timeDifference = timeDifference * 100
-		phase += timeDifference
+		if phase < threshold:
+			timeDifference = currentTime - sendTime
+			phase += timeDifference
 
 		if phase >= threshold:
 			phase = 0
