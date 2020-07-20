@@ -10,8 +10,6 @@ threshold = 360
 
 while True:
 
-	sendTime = time.time()
-
 	try:
 		if phase < threshold:
 			currentTime = time.time()
@@ -32,6 +30,8 @@ while True:
 					phase -= timeDifference
 			if phase > 180 and phase <= threshold:
 				phase += timeDifference
+
+		sendTime = currentTime
 
 	except KeyboardInterrupt:
 		print("Process Interrupted")
