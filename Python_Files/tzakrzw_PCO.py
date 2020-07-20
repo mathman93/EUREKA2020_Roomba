@@ -3,6 +3,7 @@ import serial
 from copy import copy
 from random import uniform
 
+
 #Function to adjust phase value
 def wang_op_simple(self):
     if self.val <= self.period/2:
