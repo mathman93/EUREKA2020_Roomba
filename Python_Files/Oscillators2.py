@@ -27,7 +27,7 @@ while True:
         dt = time.time() - time1
         if dt > sendtimemin:
             nodephase = dt
-            print(nodephase)
+            print(int(nodephase))
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
