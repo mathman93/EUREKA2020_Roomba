@@ -41,9 +41,9 @@ while True:
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
             if 0 < nodephase <= 180:
-                nodephase -= (dt * 2)
+                nodephase -= (dt * 6)
             if 180 < nodephase < threshold:
-                nodephase += (dt * 2)
+                nodephase += (dt * 6)
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
