@@ -26,7 +26,7 @@ while True:
         ## Increasing the phase value ##
         dt = time.time() - time1
         if dt > sendtimemin:
-            nodephase = dt * 6
+            nodephase = dt * 12
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
@@ -41,9 +41,9 @@ while True:
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
             if 0 < nodephase <= 180:
-                nodephase -= dt
+                nodephase -= (dt * 2)
             if 180 < nodephase < threshold:
-                nodephase += dt
+                nodephase += (dt * 2)
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
