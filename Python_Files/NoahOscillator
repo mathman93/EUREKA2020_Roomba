@@ -8,20 +8,19 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200)
 phase = random.randint(0,2)
 threshold = 360
 
-
-
 while True:
 
 	sendTime = time.time()
-	
+
 	try:
 		currentTime = time.time()
 		timeDifference = currentTime - sendTime
+		timeDifference = timeDifference * 100
 		phase += timeDifference
 
 		if phase >= threshold:
 			phase = 0
-			message = "Reset"
+			message = "Received"
 			Xbee.write(message.encode())
 			print("Pulse")
 
