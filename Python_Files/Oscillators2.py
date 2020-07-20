@@ -17,10 +17,10 @@ nodephase = int(input("Enter Starting Phase Value "))
 threshold = 360
 
 ## Main Code ##
+time1 = time.time()
+sendtimemin = 1
 
 while True:
-    time1 = time.time()
-    sendtimemin = 1
 
     try:
         ## Increasing the phase value ##
