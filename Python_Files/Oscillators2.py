@@ -12,21 +12,19 @@ import serial
 
 global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
-#Starting phase angles of nodes 1, 2, and 3
+#Starting phase angle
 nodephase = int(input("Enter Starting Phase Value "))
 threshold = 360
-#Starting rate of change of the phase angles
-nodephase1ROC = 5
 
 ## Main Code ##
 
 while True:
-    time1 = time.time
+    time1 = time.time()
     sendtimemin = 1
 
     try:
         ## Increasing the phase value ##
-        dt = time.time - time1
+        dt = time.time() - time1
         if dt > sendtimemin:
             nodephase += dt
 
@@ -57,4 +55,3 @@ while True:
 
 ## Ending Code ##
 Xbee.close()
-GPIO.cleanup() # Reset GPIO pins for next program
