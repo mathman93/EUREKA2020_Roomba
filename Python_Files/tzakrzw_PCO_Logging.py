@@ -99,7 +99,7 @@ while True:
             toWrite.append([current_time, PCO.phase(), 0, ping])
         if ping == 1: #If we just pinged, then write the buffer to file
             #This is most likely during refractionary period, so we should be ok
-            csv.Writer.writerows(toWrite)
+            csvWriter.writerows(toWrite)
             toWrite = []
         
         #Finially, change the current_time to the last_time and print if ping
