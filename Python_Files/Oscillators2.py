@@ -25,6 +25,7 @@ while True:
     try:
         ## Increasing the phase value ##
         dt = time.time() - time1
+        print(dt)
         if dt > sendtimemin:
             nodephase += dt
             print(nodephase)
