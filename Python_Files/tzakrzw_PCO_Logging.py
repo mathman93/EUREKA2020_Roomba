@@ -96,7 +96,7 @@ while True:
 
         #Data Logging
         if current_time >= last_log + LOG_PERIOD:
-            toWrite.append([current_time, PCO.phase(), 0, copy(ping)])
+            toWrite.append([current_time, int(PCO.phase()), 0, copy(ping)])
             last_log = copy(current_time)
         if ping == 1: #If we just pinged, then write the buffer to file
             #This is most likely during refractionary period, so we should be ok
