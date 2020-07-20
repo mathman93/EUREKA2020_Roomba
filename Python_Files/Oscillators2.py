@@ -42,8 +42,10 @@ while True:
             print(message) # To see what the message is
             if 0 < nodephase <= 180:
                 nodephase -= (dt * 6)
+                print(nodephase)
             if 180 < nodephase < threshold:
                 nodephase += (dt * 6)
+                print(nodephase)
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
