@@ -6,7 +6,6 @@ global Xbee
 Xbee = serial.Serial('/dev/USB0/', 115200)
 
 sendTime = time.time()
-delayTime = 
 phase = random.randint(0,3)
 threshold = 360
 
