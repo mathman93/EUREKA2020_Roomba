@@ -1,0 +1,43 @@
+import serial
+import time
+import random
+
+global Xbee
+Xbee = serial.Serial('/dev/USB0/', 115200)
+
+sendTime = time.time()
+delayTime = 
+phase = random.randint(0,3)
+threshold = 360
+
+
+
+while True:
+	try:
+		currentTime = time.time()
+		timeDifference = currentTime - sendTime
+		phase += timeDifference
+
+		if timeDifference > 1:
+			phase += timeDifference
+
+		if phase >= threshold:
+			phase = 0
+			message = "Reset"
+			Xbee.write(message.encode())
+			print("Pulse")
+
+
+		if Xbee.inWaiting() > 0:
+			message = Xbee.read(Xbee.inWaiting()).decode()
+			print(message)
+			if phase > 0 and phase <= 180:
+					phase -= timeDifference
+			if phase > 180 and phase <= threshold
+				phase += timeDifference
+
+	except KeyboardInterrupt:
+		print("Process Interrupted")
+		break
+
+Xbee.close()
