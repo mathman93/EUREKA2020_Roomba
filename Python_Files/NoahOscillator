@@ -15,6 +15,7 @@ while True:
 	
 		currentTime = time.time()
 		timeDifference = currentTime - sendTime
+		timeDifference = timeDifference * 15
 		phase += timeDifference
 		print(phase)
 
