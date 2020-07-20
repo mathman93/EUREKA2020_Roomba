@@ -11,10 +11,11 @@ threshold = 360
 
 
 while True:
+
+	sendTime = time.time()
+	
 	try:
 		currentTime = time.time()
-		time.sleep(0.5)
-		sendTime = time.time()
 		timeDifference = currentTime - sendTime
 		phase += timeDifference
 
