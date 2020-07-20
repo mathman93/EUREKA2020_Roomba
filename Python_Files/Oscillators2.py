@@ -26,7 +26,7 @@ while True:
         ## Increasing the phase value ##
         dt = time.time() - time1
         if dt > sendtimemin:
-            nodephase = dt
+            nodephase = dt * 20
             print(int(nodephase))
 
         ## Reaching the Threshold and Sending Pulses ##
