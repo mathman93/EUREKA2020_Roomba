@@ -48,10 +48,9 @@ def sync_start(): #Used to sync the starting times of nodes
         while time.time() < start:
             pass
 
-PCO, toWrite, csvWriter = [None]*3
 
 '''Timestamp, Phase, Angle, Ping?'''
-def record(l_phase, force=False, n=PCO, toW=toWrite, W=csvWriter):
+def record(l_phase, n, toW, W, force=False):
     #1 - Record if just pinged
     if n.ping:
         #Store both the top and bottom of a ping for better graphs
@@ -146,7 +145,7 @@ last_time = time.time()
 current_time = copy(last_time)
 
 #Write intial conditions of osilator to file
-record(None, force=True)
+record(None, PCO, toWrite, csvWriter, True)
 
 # ---- Main Loop ----
 while True:
@@ -169,7 +168,7 @@ while True:
                 last_phase = PCO.change_phase()
         
         #Data Logging
-        record(last_phase)
+        record(last_phase, PCO, toWrite, csvWriter)
 
         #Clean-up and reset for next iteration
         last_time = copy(current_time)
