@@ -41,7 +41,8 @@ def sync_start(): #Used to sync the starting times of nodes
         print('Waiting for master')
         while True:
             if Xbee.inWaiting() > 0:
-                start = int(Xbee.read(Xbee.inWaiting()).decode())
+                start = Xbee.read(Xbee.inWaiting()).decode()
+                print(start)
                 print('Start in ' + str(start - int(time.time())))
                 Xbee.write(socket.gethostname())
                 break
@@ -146,6 +147,7 @@ current_time = copy(last_time)
 
 #Write intial conditions of osilator to file
 record(None, PCO, toWrite, csvWriter, True)
+last_phase = None
 
 # ---- Main Loop ----
 while True:
