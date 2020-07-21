@@ -28,10 +28,10 @@ def sync_start(): #Used to sync the starting times of nodes
             x = int(start_dt)
             start = int(time.time()) + x
             print('Starts in ' + str(start_dt))
-            Xbee.write(x.encode())
+            Xbee.write(start.encode())
             while time.time() < start:
                 if Xbee.inWaiting() > 0:
-                    message = Xbee.read(Xbee.inWaiting()).decode()
+                    message = str(Xbee.read(Xbee.inWaiting()).decode())
                     print(message + ' added')
         except:
             print('Count down failed')
@@ -43,7 +43,7 @@ def sync_start(): #Used to sync the starting times of nodes
             if Xbee.inWaiting() > 0:
                 start = int(Xbee.read(Xbee.inWaiting()).decode())
                 print('Start in ' + str(start - int(time.time())))
-                Xbee.write(socket.gethostname())
+                Xbee.write(socket.gethostname().encode())
                 break
         while time.time() < start:
             pass
