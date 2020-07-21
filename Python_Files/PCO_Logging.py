@@ -4,18 +4,18 @@ import os
 from copy import copy
 from random import uniform
 
+#Function to adjust phase value
+def wang_op_simple(self):
+    if self.val <= PERIOD/2:
+        return -self.val
+    return PERIOD - self.val
+
 #CONSTANT
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 5 #Time in seconds for each Ossilation
 STRENGTH = .3 #Coe used with function to determine coupling strength?
 REFRACT = .1 #Time before listen more signals
 FUNCTION = wang_op_simple #Function used to change phase value
-
-#Function to adjust phase value
-def wang_op_simple(self):
-    if self.val <= PERIOD/2:
-        return -self.val
-    return PERIOD - self.val
 
 #SET UP MASTER LAST!!!!!!!!!!!
 def sync_start(): #Used to sync the starting times of nodes
