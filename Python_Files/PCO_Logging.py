@@ -1,6 +1,7 @@
 import csv
 import time
 import os
+import serial
 from copy import copy
 from random import uniform
 
