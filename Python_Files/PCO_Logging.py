@@ -28,7 +28,7 @@ def sync_start(): #Used to sync the starting times of nodes
             x = int(start_dt)
             start = int(time.time()) + x
             print('Starts in ' + str(start_dt))
-            Xbee.write(start.encode())
+            Xbee.write(str(start).encode())
             while time.time() < start:
                 if Xbee.inWaiting() > 0:
                     message = str(Xbee.read(Xbee.inWaiting()).decode())
@@ -47,6 +47,7 @@ def sync_start(): #Used to sync the starting times of nodes
                 break
         while time.time() < start:
             pass
+    print('Start')
 
 
 '''Timestamp, Phase, Angle, Ping?'''
