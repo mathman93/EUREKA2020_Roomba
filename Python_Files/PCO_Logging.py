@@ -41,8 +41,7 @@ def sync_start(): #Used to sync the starting times of nodes
         print('Waiting for master')
         while True:
             if Xbee.inWaiting() > 0:
-                start = Xbee.read(Xbee.inWaiting()).decode()
-                print(start)
+                start = int(Xbee.read(Xbee.inWaiting()).decode())
                 print('Start in ' + str(start - int(time.time())))
                 Xbee.write(socket.gethostname())
                 break
