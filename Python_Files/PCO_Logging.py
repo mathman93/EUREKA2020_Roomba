@@ -29,7 +29,7 @@ def sync_start(): #Used to sync the starting times of nodes
             start = int(time.time()) + x
             print('Starts in ' + str(start_dt))
             Xbee.write(x)
-            while time.time() > start:
+            while time.time() < start:
                 if Xbee.inWaiting() > 0:
                     message = Xbee.read(Xbee.inWaiting()).decode()
                     print(message + ' added')
@@ -41,11 +41,11 @@ def sync_start(): #Used to sync the starting times of nodes
         print('Waiting for master')
         while True:
             if Xbee.inWaiting() > 0:
-                message = Xbee.read(Xbee.inWaiting()).decode()
+                start = Xbee.read(Xbee.inWaiting()).decode()
                 print('Start in ' + str(start - int(time.time())))
                 Xbee.write(socket.gethostname())
                 break
-        while time.time() > start:
+        while time.time() < start:
             pass
 
 PCO, toWrite, csvWriter = [None]*3
