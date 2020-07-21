@@ -19,7 +19,7 @@ class Node():
 
     period = 1 #Time in seconds for each phase
     function = wang_op_simple #Function used to change phase value
-    strength = 1 #Coe used with function to determine coupling strength?
+    strength = .5 #Coe used with function to determine coupling strength?
     refract = .4 #Time before receive more signals
 
     def __init__(self, inital):
@@ -96,9 +96,12 @@ while True:
 
         #Data Logging
         if current_time >= last_log + LOG_PERIOD:
-            toWrite.append([current_time, PCO.phase(), 0, ping])
+            toWrite.append([current_time, PCO.phase(), 0, 0])
+            last_log = copy(current_time)
         if ping == 1: #If we just pinged, then write the buffer to file
             #This is most likely during refractionary period, so we should be ok
+            toWrite.append([current_time, PCO.phase(), 0, copy(ping)])
+            #Make sure to add the time of the ping (for data stuff)
             csvWriter.writerows(toWrite)
             toWrite = []
         
