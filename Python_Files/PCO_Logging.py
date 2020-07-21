@@ -94,7 +94,7 @@ class Node():
     def change_phase(self): #Adjusts the phase_value
         lp = self.phase()
         #Use strength AND phase response equation to update value
-        self.val += STRENGTH * FUNCTION()
+        self.val += STRENGTH * FUNCTION(self)
         #Checks to make sure value is within range
         if self.val > self.period: self.val = copy(PERIOD)
         elif self.val < 0: self.val = 0
