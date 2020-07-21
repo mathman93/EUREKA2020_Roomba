@@ -2,6 +2,7 @@ import csv
 import time
 import os
 import serial
+import socket
 from copy import copy
 from random import uniform
 
