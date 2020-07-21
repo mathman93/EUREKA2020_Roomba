@@ -96,7 +96,7 @@ class Node():
         #Use strength AND phase response equation to update value
         self.val += STRENGTH * FUNCTION(self)
         #Checks to make sure value is within range
-        if self.val > self.period: self.val = copy(PERIOD)
+        if self.val > PERIOD: self.val = copy(PERIOD)
         elif self.val < 0: self.val = 0
         return lp #Used for data_logging
 
