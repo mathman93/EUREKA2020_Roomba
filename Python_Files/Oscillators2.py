@@ -36,6 +36,7 @@ while True:
             message = "T"
             Xbee.write(message.encode()) #Send the letter over the Xbee
             print("Pulse Sent")
+            print(time.time())
 
         ## Receiving Pulses and Adjusting Phase Value ##
         if Xbee.inWaiting() > 0: # If there is something in the receive buffer of the Xbee for oscillator 1
