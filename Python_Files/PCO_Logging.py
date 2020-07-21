@@ -68,7 +68,7 @@ def record(l_phase, n, toW, W, force=False):
         
     #3 - Periodic Recording (Also can force record by passing True
     elif current_time >= n.last_log + LOG_PERIOD or force == True:
-        toW.append([current_time, l_phase, 0, 0])
+        toW.append([current_time, n.phase(), 0, 0])
         n.last_log = copy(current_time)
         
 
