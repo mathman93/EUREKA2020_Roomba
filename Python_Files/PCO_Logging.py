@@ -41,7 +41,7 @@ def sync_start(): #Used to sync the starting times of nodes
         print('Waiting for master')
         while True:
             if Xbee.inWaiting() > 0:
-                start = Xbee.read(Xbee.inWaiting()).decode()
+                int(start) = Xbee.read(Xbee.inWaiting()).decode()
                 print('Start in ' + str(start - int(time.time())))
                 Xbee.write(socket.gethostname())
                 break
@@ -77,7 +77,7 @@ class Node():
     def __init__(self, inital):
         self.val = inital #The value of the ossilator
         self.ping = False #Store if the node just pinged
-        self.last_log = None #Store time of last periodic record
+        self.last_log = 0 #Store time of last periodic record
                 
     def phase(self): #Return phase value of node (Range 0-360) -> converted from time to deg
         return (self.val / PERIOD) * 360
