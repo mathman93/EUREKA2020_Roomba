@@ -31,7 +31,7 @@ class Node():
     def pulse(self, ping=False): #Checks if the node is ready to pulse and then does it
         if self.val >= self.period:
             #Send out signal to other xbees
-            Xbee.write(str(current_time).encode())
+            Xbee.write(1)
             #Reset value and set ping
             self.val = 0
             return 1
@@ -102,6 +102,8 @@ while True:
             #This is most likely during refractionary period, so we should be ok
             toWrite.append([current_time, PCO.phase(), 0, copy(ping)])
             #Make sure to add the time of the ping (for data stuff)
+            toWrite.append([current_time, 360, 0, copy(ping)])
+            #Also, for making better graphs, add an record with 360 degree measure
             csvWriter.writerows(toWrite)
             toWrite = []
         
