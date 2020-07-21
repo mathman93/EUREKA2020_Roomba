@@ -42,10 +42,10 @@ while True:
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
             if 0 < nodephase <= 180:
-                nodephase -= 20
+                nodephase -= 5
                 print(nodephase)
             if 180 < nodephase < threshold:
-                nodephase += 20
+                nodephase += 5
                 print(nodephase)
 
     ## Keyboard Interupt ##
