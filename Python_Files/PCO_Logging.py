@@ -46,7 +46,7 @@ def sync_start(): #Used to sync the starting times of nodes
         while time.time() > start:
             pass
 
-PCO, toWrite, csvWriter = None
+PCO, toWrite, csvWriter = [None]*3
 
 '''Timestamp, Phase, Angle, Ping?'''
 def record(l_phase, force=False, n=PCO, toW=toWrite, W=csvWriter):
