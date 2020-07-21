@@ -5,8 +5,8 @@ import os
 
 plt.ion()
 
-filenames = ['raspberrypi1_July 21, 2020, 22:13:53.csv',
-             'raspberrypi2_July 21, 2020, 22:13:58.csv']
+filenames = ['raspberrypi1_July 21, 2020, 22:59:35.csv',
+             'raspberrypi2_July 21, 2020, 22:59:51.csv']
 #filenames = ['Node1.csv']
 colors = ['r', 'b', 'g', 'c', 'm', 'y']
 i = 0

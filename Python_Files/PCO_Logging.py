@@ -60,6 +60,7 @@ def record(l_phase, n, toW, W, force=False):
         
         #Also, write all the buffer to the file, mostlikely during refraction
         W.writerows(toW)
+        return True
         
     #2 - Record if have a phase change
     elif l_phase: #This value will be the old phase if there was a phase change
@@ -170,7 +171,8 @@ while True:
                 last_phase = PCO.change_phase()
         
         #Data Logging
-        record(last_phase, PCO, toWrite, csvWriter)
+        if record(last_phase, PCO, toWrite, csvWriter):
+            toWrite = [] #Reset buffer if just wrote the data
 
         #Clean-up and reset for next iteration
         last_time = copy(current_time)
