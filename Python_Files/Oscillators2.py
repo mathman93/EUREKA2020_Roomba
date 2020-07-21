@@ -40,11 +40,11 @@ while True:
         if Xbee.inWaiting() > 0: # If there is something in the receive buffer of the Xbee for oscillator 1
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
-            if 0 < nodephase <= 180:
-                nodephase -= (dt * 10)
+            if 0 < nodephase <= 180 or nodephase >= threshold:
+                nodephase = dt - 10
                 print(nodephase)
             if 180 < nodephase < threshold:
-                nodephase += (dt * 10)
+                nodephase = dt + 10
                 print(nodephase)
 
     ## Keyboard Interupt ##
