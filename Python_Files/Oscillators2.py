@@ -27,7 +27,6 @@ while True:
         dt = time.time() - time1
         if dt > sendtimemin:
             nodephase += dt
-            print(nodephase)
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
@@ -44,10 +43,8 @@ while True:
             print(message) # To see what the message is
             if 0 < nodephase <= 180:
                 nodephase -= 5
-                print(nodephase)
             if 180 < nodephase < threshold:
                 nodephase += 5
-                print(nodephase)
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
