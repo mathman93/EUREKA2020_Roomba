@@ -29,7 +29,6 @@ while True:
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
-            nodephase = 0
             time1 = time.time()
             message = "T"
             Xbee.write(message.encode()) #Send the letter over the Xbee
