@@ -15,7 +15,7 @@ while True:
 	
 		currentTime = time.time()
 		timeDifference = currentTime - sendTime
-		phase += timeDifference * 45
+		#phase += timeDifference * 45
 
 		if phase >= threshold:
 			phase = 0
