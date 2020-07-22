@@ -45,7 +45,7 @@ while True:
 		if phase > 350:
 			phase += .5
 
-
+	sendTime = time.time()
 
 
 	except KeyboardInterrupt:
