@@ -13,7 +13,7 @@ PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 STRENGTH = .6 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
-SYNC_THRESHOLD = .01 #Seconds between pulses that counts as syncronized
+SYNC_THRESHOLD = .001 #Seconds between pulses that counts as syncronized
 
 
 
@@ -141,12 +141,12 @@ while True:
                 Type = Delay-Advance
                 Form = Wang Optimal Simple
                 '''
-                value -= offset #Remove the offset to make reasginment easier
                 if value <= HALF_PERIOD:
-                    offset -= STRENGTH * value
+                    delta -= STRENGTH * value
                 else:
-                    offset += STRENGTH * (PERIOD - value)
-                value += offset
+                    delta += STRENGTH * (PERIOD - value)
+                value += delta
+                offset += delta
 
     #-----END PHASE RESPONSE ------
 
