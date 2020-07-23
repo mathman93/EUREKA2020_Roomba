@@ -113,7 +113,7 @@ if input('Sync start?'):
     ss = True
     try:
         phs = int(input('Beginning Val?'))
-        if REFRACT >= phs >= PERIOD:
+        if REFRACT <= phs <= PERIOD:
             pass
         else:
             raise ValueError('Out of acceptable range')
