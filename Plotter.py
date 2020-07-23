@@ -16,7 +16,7 @@ for name in x:
     if os.path.isdir(n):
         ans = input('Want to Draw Contents of '+ name + ' ?')
         if ans == 'y':
-            for file in glob.glob("Data_Files/*/*.csv"):
+            for file in glob.glob("Data_Files/"+name+"/*.csv"):
                 filenames.append(file)
         elif ans == 'q':
             break
