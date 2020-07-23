@@ -7,6 +7,7 @@
 
 import time
 import serial
+import math
 
 ## Globals and Variables ##
 
@@ -40,7 +41,7 @@ while True:
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
             print(nodephase)
-            x = (1/2) * (log((1 + (e**2 - 1) * nodephase), e))
+            x = (1/2) * (math.log((1 + (e**2 - 1) * nodephase), e))
             if 0 < x <= 3.5242:
                 x -= epsilon
             if 3.524 < x < 3.8705:
