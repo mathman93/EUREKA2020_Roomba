@@ -83,7 +83,6 @@ csvWriter.writerow(['Timestamp', 'Phase', 'Angle', 'Ping?'])
 
 toWrite = [] #2D list that is temp storage for logs
 value = 0 #The value of the ossilator, which used to find phase
-start = time.time() #The start time of the current cycle
 offset = phs #The increase to value caused by phase shifts (or inital conditions)
 head = 0 #Used to store the 'heading' of an node -> only works with sync_start
 log_timer = start + LOG_PERIOD #The time of the next periodic log
@@ -100,7 +99,7 @@ toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
 
-
+start = time.time() #The start time of the current cycle
 #-------- Main Loop ---------
 while True:
     try:
