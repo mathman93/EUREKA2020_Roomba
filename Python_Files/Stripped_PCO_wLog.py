@@ -93,7 +93,7 @@ log_timer = start + LOG_PERIOD #The time of the next periodic log
 
 if ss: sync_start() #Try to set global time for all the nodes to start at
 #Write intial conditions of osilator to file
-toWrite.append([time.time(), value / PERIOD * 360, 0, 0])
+toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
 
 
 
