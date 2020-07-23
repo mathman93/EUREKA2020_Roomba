@@ -74,7 +74,7 @@ else:
 #Data file creation and such
 fname = socket.gethostname() + '_' + time.strftime("%B %d, %Y, %H_%M_%S", time.gmtime()) + '.csv'
 #That time format is stolen from Xbee_Read_Test ;)
-path = os.path.join('..', 'Data_Files', socket.gethostname(), fname)
+path = os.path.join('..', 'Data_Files', fname)
 file = open(path, 'w', newline='')
 csvWriter = csv.writer(file) #The object to write in csv format to the file
 #Header for the file that defines what is in each column
@@ -110,8 +110,8 @@ while True:
             Xbee.write(str(1).encode())
             #Write info
             #Store both the top and bottom of a ping for better graphs
-            toWrite.append([current_time, 360, head, 1])
-            toWrite.append([current_time, 0, head, 0])
+            toWrite.append([current_time, 360, offset, 1])
+            toWrite.append([current_time, 0, 0, 0])
             #Reset start, log_timer, offset, and value
             start = time.time()
             log_timer = start + LOG_PERIOD
@@ -134,7 +134,7 @@ while True:
                 #However, its exsistence is noted
 
                 #Record the current phase before changing for good graphs
-                toWrite.append([current_time, (value / PERIOD) * 360, head, 0])
+                toWrite.append([current_time, (value / PERIOD) * 360, offset, 0])
                 
     #-----PHASE RESPONSE PART------
                 '''
@@ -151,11 +151,11 @@ while True:
     #-----END PHASE RESPONSE ------
 
                 #Record the new phase
-                toWrite.append([current_time, (value / PERIOD) * 360, head, 0])
+                toWrite.append([current_time, (value / PERIOD) * 360, offset, 0])
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, (value / PERIOD) * 360, head, 0])
+            toWrite.append([current_time, (value / PERIOD) * 360, offset, 0])
             log_timer += LOG_PERIOD
 
 
