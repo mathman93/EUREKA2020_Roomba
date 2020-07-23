@@ -79,27 +79,24 @@ csvWriter = csv.writer(file) #The object to write in csv format to the file
 #Header for the file that defines what is in each column
 csvWriter.writerow(['Timestamp', 'Phase', 'Angle', 'Ping?'])
 
+if ss: sync_start() #Try to set global time for all the nodes to start at
+#----- END OF INIT -------
+
+
+#------- BEGINNING PROCEDURES --------
 #Variables that will be used during the MAIN LOOP
 
 toWrite = [] #2D list that is temp storage for logs
 value = 0 #The value of the ossilator, which used to find phase
 offset = phs #The increase to value caused by phase shifts (or inital conditions)
 head = 0 #Used to store the 'heading' of an node -> only works with sync_start
-log_timer = start + LOG_PERIOD #The time of the next periodic log
-
-#----- END OF INIT -------
-#------- BEGINNING PROCEDURES --------
-
-if ss: sync_start() #Try to set global time for all the nodes to start at
 #Write intial conditions of osilator to file
 toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
 
-
-
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
-
 start = time.time() #The start time of the current cycle
+log_timer = start + LOG_PERIOD #The time of the next periodic log
 #-------- Main Loop ---------
 while True:
     try:
