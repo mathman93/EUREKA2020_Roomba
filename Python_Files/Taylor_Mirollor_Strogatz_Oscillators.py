@@ -1,3 +1,8 @@
+
+## IMPORTANT ##
+# The code involving the Xbees will be altered once I have access to the three Xbees and can distinguish between them in the code.
+# For now, this code read like of all three oscillators are associated with the same Xbee, but this will be fixed later.
+
 ## Imports ##
 
 import time
@@ -14,6 +19,7 @@ threshold = 360
 ## Main Code ##
 time1 = time.time()
 sendtimemin = 1
+epsilon = 0.1
 
 while True:
 
@@ -27,17 +33,18 @@ while True:
             message = "T"
             Xbee.write(message.encode()) #Send the letter over the Xbee
             print("Pulse Sent")
-            print(nodephase)
 
         ## Receiving Pulses and Adjusting Phase Value ##
         if Xbee.inWaiting() > 0: # If there is something in the receive buffer of the Xbee for oscillator 1
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
-            print(nodephase)
-            if 0 < nodephase <= 180:
-                time1 += 5
-            if 180 < nodephase < threshold:
-                time1 -= 5
+            x = (1/2) * (np.log(1 + (e^2 - 1) * nodephase))
+            if 0 < x <= 3.5242:
+                x -= epsilon
+            if 3.524 < x < 3.8705:
+                x += epsilon
+            NodephasePlus = (e^(2 * x) - 1)/(e^2 - 1)
+            time1 += NodephasePlus
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
@@ -50,3 +57,4 @@ while True:
 
 ## Ending Code ##
 Xbee.close()
+
