@@ -11,7 +11,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-STRENGTH = .6 #Coe used with function to determine coupling strength?
+STRENGTH = .9 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 SYNC_THRESHOLD = .001 #Seconds between pulses that counts as syncronized
 
