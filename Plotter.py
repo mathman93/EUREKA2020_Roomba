@@ -2,16 +2,41 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 import os
+import glob
 
 plt.ion()
 
-filenames = ['raspberrypi1_July 21, 2020, 23:08:05.csv',
-             'raspberrypi2_July 21, 2020, 23:08:23.csv']
-#filenames = ['Node1.csv']
+
+#Get file names
+x = os.listdir('Data_Files')
+print(x)
+filenames = []
+for name in x:
+    n = os.path.join('Data_Files',name)
+    if os.path.isdir(n):
+        ans = input('Want to Draw Contents of '+ name + ' ?')
+        if ans == 'y':
+            for file in glob.glob("Data_Files/*/*.csv"):
+                filenames.append(file)
+        elif ans == 'q':
+            break
+        else:
+            print('Not including')
+    elif os.path.isfile(n):
+        if os.path.splitext(name)[-1].lower() == '.csv':
+            ans = input('Want to Draw ' + name + ' ?')
+            if ans == 'y':
+                filenames.append(n)
+            elif ans == 'q':
+                break
+            else:
+                print('Not including')
+
+
 colors = ['r', 'b', 'g', 'c', 'm', 'y']
 i = 0
 for fm in filenames:
-    with open(os.path.join('Data_Files', fm), newline='') as f:
+    with open(fm, newline='') as f:
         reader = csv.reader(f, delimiter=',')
         x = []
         y = []
