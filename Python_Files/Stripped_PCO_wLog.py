@@ -106,7 +106,7 @@ while True:
     try:
         #Update value
         current_time = time.time()
-        value = start - current_time + offset #Set the value
+        value = current_time - start + offset #Set the value
 
         #Check if need to pulse and then send pulse
         if value >= PERIOD:
@@ -125,15 +125,14 @@ while True:
 
         #Check first if not during refractionary period and then if there is singals waiting
         if value >= REFRACT:
-            inWait = Xbee.inWaiting()
-            if inWait > 0:
-                Xbee.read(inWait) #Don't care what it does with the message
+            if Xbee.inWaiting() > 0:
+                message = Xbee.read(Xbee.inWaiting()).encode()
                 #Note - this will read all the pulses send to the serial port since the last
                 #call of the loop, which maybe more than one. This is simply a risk that is taken
                 #However, its exsistence is noted
 
                 #Record the current phase before changing for good graphs
-                toWrite.append([current_time, value / PERIOD * 360, head, 0])
+                toWrite.append([current_time, (value / PERIOD) * 360, head, 0])
                 
     #-----PHASE RESPONSE PART------
                 '''
@@ -150,11 +149,11 @@ while True:
     #-----END PHASE RESPONSE ------
 
                 #Record the new phase
-                toWrite.append([current_time, value / PERIOD * 360, head, 0])
+                toWrite.append([current_time, (value / PERIOD) * 360, head, 0])
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, value / PERIOD * 360, head, 0])
+            toWrite.append([current_time, (value / PERIOD) * 360, head, 0])
             log_timer += LOG_PERIOD
 
 
