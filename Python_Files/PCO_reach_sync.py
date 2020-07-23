@@ -58,7 +58,7 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 if input('Sync start?'):
     ss = True
     try:
-        phs = int(input('Beginning Val?'))
+        phs = float(input('Beginning Val?'))
         if REFRACT <= phs <= PERIOD:
             pass
         else:
