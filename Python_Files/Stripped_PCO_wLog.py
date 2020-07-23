@@ -125,8 +125,9 @@ while True:
 
         #Check first if not during refractionary period and then if there is singals waiting
         if value >= REFRACT:
-            if Xbee.inWaiting() > 0:
-                message = Xbee.read(Xbee.inWaiting()).encode()
+            inWait = Xbee.inWaiting()
+            if inWait > 0:
+                Xbee.read(inWait)
                 #Note - this will read all the pulses send to the serial port since the last
                 #call of the loop, which maybe more than one. This is simply a risk that is taken
                 #However, its exsistence is noted
