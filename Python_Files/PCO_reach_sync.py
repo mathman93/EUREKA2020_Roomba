@@ -144,7 +144,7 @@ while True:
                 if value <= HALF_PERIOD:
                     delta = STRENGTH * value
                 else:
-                    delta = STRENGTH * (PERIOD - value)
+                    delta = -STRENGTH * (PERIOD - value)
                 value += delta
                 offset += delta
 
