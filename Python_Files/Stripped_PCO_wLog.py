@@ -138,9 +138,9 @@ while True:
                 '''
                 value -= offset #Remove the offset to make reasginment easier
                 if value <= HALF_PERIOD:
-                    offset += STRENGTH * value
+                    offset -= STRENGTH * value
                 else:
-                    offset -= STRENGTH * (PERIOD - value)
+                    offset += STRENGTH * (PERIOD - value)
                 value += offset
 
     #-----END PHASE RESPONSE ------
