@@ -20,7 +20,7 @@ threshold = 360
 ## Main Code ##
 time1 = time.time()
 sendtimemin = 1
-epsilon = 0.1
+epsilon = 1
 ScalingFactor = 12
 
 while True:
@@ -42,9 +42,9 @@ while True:
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
             print(nodephase)
-            x = (1/2) * (math.log1p((math.expm1(2) * nodephase)))
+            x = (360/2) * (math.log1p((math.expm1(2) * (nodephase/360))))
             x += epsilon
-            NodephasePlus = (math.expm1(2 * x))/(math.expm1(2))
+            NodephasePlus = 360 * ((math.expm1(2 * (x/360)))/(math.expm1(2)))
             time1 -= (NodephasePlus - nodephase)/ScalingFactor
 
     ## Keyboard Interupt ##
