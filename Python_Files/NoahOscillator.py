@@ -31,9 +31,9 @@ while True:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
 			if 0 <= phase <= 180:
-				phase -= 10
+				phase -= timeDifference * 90
 			if 180 < phase <= threshold:
-				phase += 10
+				phase += timeDifference * 90
 
 
 	except KeyboardInterrupt:
