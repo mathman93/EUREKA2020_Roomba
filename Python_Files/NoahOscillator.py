@@ -33,7 +33,7 @@ while True:
 			if 0 <= phase <= 180:
 				phase -= phase
 			if 180 < phase <= threshold:
-				phase += (360 - phase)
+				phase += (threshold - phase)
 
 
 	except KeyboardInterrupt:
