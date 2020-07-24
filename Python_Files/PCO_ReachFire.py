@@ -16,7 +16,7 @@ LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 REFRACT = 0.05 #Time before listen more signals
-EPSILON = .02 #Value to increase state during phase change
+EPSILON = .2 #Value to increase state during phase change
 
 
 
@@ -115,7 +115,7 @@ while True:
             #Write info
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, 360, offset, 1])
-            toWrite.append([current_time, 0, 0, 0])
+            toWrite.append([current_time, next_offset, next_offset, 0])
             #Reset start, log_timer, offset, and value
             start = current_time
             log_timer = start + LOG_PERIOD
@@ -147,11 +147,10 @@ while True:
                 Type = Reachback Firefly
                 Form = Reachback Firefly (Only version)
                 '''
-                old_v = value #Used to calc offset
                 #Scale value to range 0-1 for calculations and then scale back at end
                 f = math.log(value/PERIOD)
                 new_v = math.exp(f+EPSILON) * PERIOD #Make sure to rescale to period
-                next_offset += new_v - old_v
+                next_offset += new_v - value
 
     #-----END PHASE RESPONSE ------
 
