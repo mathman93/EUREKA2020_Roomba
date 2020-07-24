@@ -31,7 +31,7 @@ while True:
 			if 180 < phase <= threshold:
 				phase += timeDifference * 45 
 
-	previousTime = currentTime
+	previousTime = copy(currentTime)
 
 
 	except KeyboardInterrupt:
