@@ -31,6 +31,7 @@ while True:
 				phase -= timeDifference * 300
 			if 180 < phase <= threshold:
 				phase += timeDifference * 300
+			print phase
 
 		previousTime = copy(currentTime)
 
