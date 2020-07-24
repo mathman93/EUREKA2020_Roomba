@@ -16,6 +16,7 @@ while True:
 	
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
+		print (phase)
 
 		if phase >= threshold:
 			phase = 0
@@ -31,7 +32,7 @@ while True:
 				phase -= timeDifference * 300
 			if 180 < phase <= threshold:
 				phase += timeDifference * 300
-			print (phase)
+
 
 		previousTime = copy(currentTime)
 
