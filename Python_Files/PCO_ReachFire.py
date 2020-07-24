@@ -93,6 +93,7 @@ toWrite = [] #2D list that is temp storage for logs
 value = 0 #The value of the ossilator, which used to find phase
 offset = phs #The increase to value caused by phase shifts (or inital conditions)
 head = 0 #Used to store the 'heading' of an node -> only works with sync_start
+next_offset = 0 #Stores the offset value for the next cycle
 #Write intial conditions of osilator to file
 toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
 
