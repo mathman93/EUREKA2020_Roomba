@@ -15,7 +15,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-REFRACT = 0.05 #Time before listen more signals
+REFRACT = 0.1 #Time before listen more signals
 EPSILON = .1 #Value to increase state during phase change
 
 
@@ -115,7 +115,7 @@ while True:
             #Write info
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, 360, offset, 1])
-            toWrite.append([current_time, copy(next_offset), next_offset, 0])
+            toWrite.append([current_time, copy(next_offset) / PERIOD * 360, next_offset, 0])
             #Reset start, log_timer, offset, and value
             start = current_time
             log_timer = start + LOG_PERIOD
