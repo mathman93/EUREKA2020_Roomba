@@ -73,7 +73,7 @@ global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 
 #Data file creation and such
-fname = socket.gethostname() + '_' + 'MS' + '_' + time.strftime("%B %d, %Y, %H_%M_%S", time.gmtime()) + '.csv'
+fname = socket.gethostname() + '_' + 'FR' + '_' + time.strftime("%B %d, %Y, %H_%M_%S", time.gmtime()) + '.csv'
 #That time format is stolen from Xbee_Read_Test ;)
 #Write files to non-github localtion on pis
 path = os.path.join('..', '..', 'PCO_Data', fname)
@@ -124,7 +124,7 @@ while True:
             #This time is during a refraction period, so even if there was an incoming single, PCO would not care
             #However, doing calc when get signle is still fast enough, as it is not really the bottleneck in the
             #loop (serial functions are)
-            value = 0 #Insures that change_phase and log_timer work 
+            value = next_offset #Insures that change_phase and log_timer work 
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
