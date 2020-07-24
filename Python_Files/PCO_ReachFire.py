@@ -8,6 +8,7 @@ import os
 import serial
 import socket
 import math
+from copy import copy
 from random import uniform
 
 #CONSTANTS
@@ -119,13 +120,13 @@ while True:
             start = current_time
             log_timer = start + LOG_PERIOD
             head += offset #TESTING -> MAY LEAVE LATER
-            offset = next_offset #Set the new offset value to that which had acumlated over the last cycle
+            offset = copy(next_offset) #Set the new offset value to that which had acumlated over the last cycle
             #Note - actually, all the calculations to find the next_offset should happen right now b/c
             #This time is during a refraction period, so even if there was an incoming single, PCO would not care
             #However, doing calc when get signle is still fast enough, as it is not really the bottleneck in the
             #loop (serial functions are)
-            value = next_offset #Insures that change_phase and log_timer work
-            next_offset = next_offset - next_offset #We do have to reset this to 0
+            value = copy(next_offset) #Insures that change_phase and log_timer work
+            next_offset = 0 #We do have to reset this to 0
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
