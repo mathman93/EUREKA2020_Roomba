@@ -125,7 +125,7 @@ while True:
             #However, doing calc when get signle is still fast enough, as it is not really the bottleneck in the
             #loop (serial functions are)
             value = next_offset #Insures that change_phase and log_timer work
-            next_offset = 0 #We do have to reset this to 0
+            next_offset = next_offset - next_offset #We do have to reset this to 0
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
