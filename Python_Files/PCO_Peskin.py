@@ -143,8 +143,8 @@ while True:
 ##                #Scale value to range 0-1 for calculations and then scale back at end
 ##                f = C*math.expm1(-GAMMA*(value / PERIOD))
 ##                value = (1/GAMMA)*math.log(C/(C+(f+EPSILON))) * PERIOD #Make sure to rescale to period
-                value += .5
-                if value > PERIOD: value = PERIOD
+##                if value > PERIOD: value = PERIOD
+                value = PERIOD
                 offset += value - old_v
 
     #-----END PHASE RESPONSE ------
