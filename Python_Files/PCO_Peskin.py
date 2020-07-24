@@ -75,7 +75,8 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 #Data file creation and such
 fname = socket.gethostname() + '_' + time.strftime("%B %d, %Y, %H_%M_%S", time.gmtime()) + '.csv'
 #That time format is stolen from Xbee_Read_Test ;)
-path = os.path.join('..', 'Data_Files', socket.gethostname(), fname)
+#Write files to non-github localtion on pis
+path = os.path.join('..', '..', 'PCO_Data', fname)
 file = open(path, 'w', newline='')
 csvWriter = csv.writer(file) #The object to write in csv format to the file
 #Header for the file that defines what is in each column
