@@ -143,7 +143,7 @@ while True:
                 old_v = value #Used to calc offset
                 #Scale value to range 0-1 for calculations and then scale back at end
                 f = (1/B)*math.log(1+C*(value / PERIOD))
-                value = math.expm1(f*B)/C * PERIOD #Make sure to rescale to period
+                value = math.expm1((f+EPSILON)*B)/C * PERIOD #Make sure to rescale to period
                 if value > PERIOD: value = PERIOD
                 offset += value - old_v
 

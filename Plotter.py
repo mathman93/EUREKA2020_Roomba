@@ -81,7 +81,7 @@ if ans != 'y':
         if os.path.isdir(path):
             #Check if contains a y
             if 'z' not in name:
-                for file in glob.glob(path+"/*.csv"):
+                for file in glob.glob(path+"/PCO_Data/*.csv"):
                     possible_files.append(file)
                 #Choice which file from the list
                 print('Directory: ', name)
