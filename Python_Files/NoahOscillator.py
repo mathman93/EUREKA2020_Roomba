@@ -14,6 +14,7 @@ while True:
 
 	try:
 	
+		previousTime = copy(currentTime)
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
 		phase = timeDifference * 90
@@ -33,9 +34,6 @@ while True:
 				phase -= 10
 			if 180 < phase <= threshold:
 				phase += 10
-
-
-		previousTime = copy(currentTime)
 
 
 	except KeyboardInterrupt:
