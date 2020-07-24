@@ -1,4 +1,6 @@
 '''Striped down version of the PCO that should run faster'''
+#Because this is the firefly one, there is a slightly different handling of the offset variable
+#The offset is constant throughout a phase, yet changes when a fireing happens
 
 import csv
 import time
@@ -13,9 +15,7 @@ LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 REFRACT = 0.05 #Time before listen more signals
-B = 5 #Constant / Strength / IDk -> used in M+S
 EPSILON = .02 #Value to increase state during phase change
-C = math.expm1(B) # = (e^B - 1) which is common value in M+S formula
 
 
 
@@ -118,7 +118,11 @@ while True:
             start = current_time
             log_timer = start + LOG_PERIOD
             head += offset #TESTING -> MAY LEAVE LATER
-            offset = 0
+            offset = next_offset #Set the new offset value to that which had acumlated over the last cycle
+            #Note - actually, all the calculations to find the next_offset should happen right now b/c
+            #This time is during a refraction period, so even if there was an incoming single, PCO would not care
+            #However, doing calc when get signle is still fast enough, as it is not really the bottleneck in the
+            #loop (serial functions are)
             value = 0 #Insures that change_phase and log_timer work 
 
 
@@ -137,15 +141,14 @@ while True:
                 
     #-----PHASE RESPONSE PART------
                 '''
-                Type = Mirollor Strogatz (-ish)
-                Form = Mirrolo and Strogatz
+                Type = Reachback Firefly
+                Form = Reachback Firefly (Only version)
                 '''
                 old_v = value #Used to calc offset
                 #Scale value to range 0-1 for calculations and then scale back at end
-                f = (1/B)*math.log(1+C*(value / PERIOD))
-                value = math.expm1((f+EPSILON)*B)/C * PERIOD #Make sure to rescale to period
-                if value > PERIOD: value = PERIOD
-                offset += value - old_v
+                f = math.log(value/PERIOD)
+                new_v = math.exp(f+EPSILON) * PERIOD #Make sure to rescale to period
+                next_offset += new_v - old_v
 
     #-----END PHASE RESPONSE ------
 
