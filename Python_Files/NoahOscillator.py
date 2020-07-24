@@ -29,9 +29,9 @@ while True:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
 			if 0 <= phase <= 180:
-				phase -= timeDifference * 300
+				phase -= 15
 			if 180 < phase <= threshold:
-				phase += timeDifference * 300
+				phase += 15
 
 
 		previousTime = copy(currentTime)
