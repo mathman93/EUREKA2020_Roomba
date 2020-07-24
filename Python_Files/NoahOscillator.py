@@ -18,7 +18,7 @@ while True:
 		previousTime = copy(currentTime)
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
-		phase += 5
+		phase += .1
 
 		if phase >= threshold:
 			phase = 0
