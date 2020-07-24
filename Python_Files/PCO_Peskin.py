@@ -12,7 +12,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-REFRACT = 0 #Time before listen more signals
+REFRACT = 0.01 #Time before listen more signals
 GAMMA = 3 #Leaky Capacitor value / strength / IDk -> used in Peskin
 EPSILON = .02 #Value to increase state during phase change
 C = math.expm1(-GAMMA) # = (e^-GAMMA - 1) which is common value in Peskin formula
