@@ -14,7 +14,7 @@ PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 REFRACT = 0 #Time before listen more signals
 GAMMA = 3 #Leaky Capacitor value / strength / IDk -> used in Peskin
-EPSILON = .002 #Value to increase state during phase change
+EPSILON = .02 #Value to increase state during phase change
 C = math.expm1(-GAMMA) # = (e^-GAMMA - 1) which is common value in Peskin formula
 
 
@@ -143,7 +143,8 @@ while True:
                 #Scale value to range 0-1 for calculations and then scale back at end
                 f = C*math.expm1(-GAMMA*(value / PERIOD))
                 value = (1/GAMMA)*math.log(C/(C+(f+EPSILON))) * PERIOD #Make sure to rescale to period
-                offset += value - old_v 
+                if value > PERIOD: value = PERIOD
+                offset += value - old_v
 
     #-----END PHASE RESPONSE ------
 
