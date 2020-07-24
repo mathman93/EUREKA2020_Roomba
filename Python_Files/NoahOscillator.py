@@ -19,7 +19,6 @@ while True:
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
 		phase += timeDifference * 90
-		print (phase)
 
 		if phase >= threshold:
 			phase = 0
