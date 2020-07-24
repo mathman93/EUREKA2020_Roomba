@@ -16,7 +16,7 @@ LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 REFRACT = 0.05 #Time before listen more signals
-EPSILON = .02 #Value to increase state during phase change
+EPSILON = .05 #Value to increase state during phase change
 
 
 
