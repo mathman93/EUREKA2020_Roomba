@@ -124,7 +124,8 @@ while True:
             #This time is during a refraction period, so even if there was an incoming single, PCO would not care
             #However, doing calc when get signle is still fast enough, as it is not really the bottleneck in the
             #loop (serial functions are)
-            value = next_offset #Insures that change_phase and log_timer work 
+            value = next_offset #Insures that change_phase and log_timer work
+            next_offset = 0 #We do have to reset this to 0
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
