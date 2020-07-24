@@ -1,7 +1,7 @@
 import serial
 import time
 import random
-import copy
+from copy import copy
 
 global Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200)
