@@ -46,7 +46,7 @@ if ans == 'y':
             #Check if contains a y
             if 'z' not in name:
                 #Look at all the files in the directory that are .csv
-                for file in glob.glob(path+"/*.csv"):
+                for file in glob.glob(path+"/**/*.csv", recursive=True):
                     #print(file)
                     possible_files.append(file)
                 #Then, cycle through and find the one with the largest number
