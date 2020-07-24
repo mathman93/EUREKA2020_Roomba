@@ -13,7 +13,6 @@ PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 STRENGTH = .6 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
-SYNC_THRESHOLD = .005 #Seconds between pulses that counts as syncronized
 
 
 
@@ -50,10 +49,6 @@ def sync_start(): #Used to sync the starting times of nodes
 
 # ---- Init ----
 
-#Copy from Xbee_Read_Test.py to begin serial comunciation
-global Xbee # Specifies connection to Xbee
-Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
-
 #Get some starting information
 if input('Sync start?'):
     ss = True
@@ -71,6 +66,10 @@ else:
     phs = uniform(0,PERIOD)
     ss = False
 
+#Copy from Xbee_Read_Test.py to begin serial comunciation
+global Xbee # Specifies connection to Xbee
+Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
+
 #Data file creation and such
 fname = socket.gethostname() + '_' + time.strftime("%B %d, %Y, %H_%M_%S", time.gmtime()) + '.csv'
 #That time format is stolen from Xbee_Read_Test ;)
@@ -78,7 +77,7 @@ path = os.path.join('..', 'Data_Files', socket.gethostname(), fname)
 file = open(path, 'w', newline='')
 csvWriter = csv.writer(file) #The object to write in csv format to the file
 #Header for the file that defines what is in each column
-csvWriter.writerow(['Timestamp', 'Phase', 'Angle', 'Ping?'])
+csvWriter.writerow(['Timestamp', 'Phase', 'Offset', 'Ping?'])
 
 if ss: sync_start() #Try to set global time for all the nodes to start at
 #----- END OF INIT -------
@@ -113,7 +112,7 @@ while True:
             toWrite.append([current_time, 360, offset, 1])
             toWrite.append([current_time, 0, 0, 0])
             #Reset start, log_timer, offset, and value
-            start = time.time()
+            start = current_time
             log_timer = start + LOG_PERIOD
             head += offset #TESTING -> MAY LEAVE LATER
             offset = 0
@@ -125,10 +124,7 @@ while True:
         inWait = Xbee.inWaiting()
         if inWait > 0:
             Xbee.read(inWait)
-            if value <= SYNC_THRESHOLD:
-                print('Synced')
-                break
-            elif value >= REFRACT:
+            if value >= REFRACT:
                 #Note - this will read all the pulses send to the serial port since the last
                 #call of the loop, which maybe more than one. This is simply a risk that is taken
                 #However, its exsistence is noted
