@@ -2,6 +2,7 @@ import serial
 import time
 import random
 from copy import copy
+import math
 
 global Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200)
@@ -30,10 +31,7 @@ while True:
 		if Xbee.inWaiting() > 0:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
-			if 0 <= phase <= 180:
-				phase -= phase
-			if 180 < phase <= threshold:
-				phase += (threshold - phase)
+			phase = -math.sin((phase / 360) 2 * math.pi)(360 / 2 * math.pi)
 
 
 	except KeyboardInterrupt:
