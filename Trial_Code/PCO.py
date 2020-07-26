@@ -29,7 +29,7 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 
 #Sets up files stuffs
 def init_file(file_prefix, file_path, header):
-    file_name = file_prefix + time.strftime("%I%p%M%S")
+    file_name = file_prefix + time.strftime("%I%p%M%S") + '.csv'
     path = os.path.join(file_path, file_name)
     file = open(path, 'w', newline='')
     csvWriter = csv.writer(file) #The object to write in csv format to the file
