@@ -18,7 +18,7 @@ while True:
 		previousTime = copy(currentTime)
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
-		phase += 5
+		phase += timeDifference * 60
 
 		if phase >= threshold:
 			phase = 0
@@ -33,7 +33,7 @@ while True:
 			if 0 <= phase <= 180:
 				phase -= phase
 			if 180 < phase <= threshold:
-				phase += (360 - phase)
+				phase += (threshold - phase)
 
 
 	except KeyboardInterrupt:
