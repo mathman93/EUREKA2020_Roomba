@@ -120,7 +120,7 @@ for info in method_dicts:
 
 #The REAL DEAL Stuffs
 #First call the start_sim to gets all the clocks synced up, then loop through conditions to collect data
-MASTER = start_sim()
+MASTER = PCO.start_sim()
                     
 #Level 1 - Different methods
 for info in method_dicts:
