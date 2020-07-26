@@ -135,7 +135,6 @@ def delay_advance(file_prefix, file_path, master, start_phase, REFRACT, STRENGTH
 
 
     #Call init functions
-    C = math.expm1(-GAMMA) # = (e^-GAMMA - 1) which is common value in Peskin formula
     csvWriter, file = init_file(file_prefix, file_path, header)
     loop_start = sync_start(master)
     
@@ -242,6 +241,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
     header = [typ, function, refract, epsilon, gamma, start]
 
     #Call init functions
+    C = math.expm1(-GAMMA) # = (e^-GAMMA - 1) which is common value in Peskin formula
     csvWriter, file = init_file(file_prefix, file_path, header)
     loop_start = sync_start(master)
     
