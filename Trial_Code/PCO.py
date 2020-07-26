@@ -155,6 +155,7 @@ def delay_advance(file_prefix, file_path, master, start_phase, REFRACT, STRENGTH
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
+    current_time = time.time()
     log_timer = start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
@@ -262,6 +263,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
+    current_time = time.time()
     log_timer = start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
@@ -368,6 +370,7 @@ def M_and_S(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, B): #
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
+    current_time = time.time()
     log_timer = start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
@@ -485,6 +488,7 @@ def Reachback_Firefly(file_prefix, file_path, master, start_phase, REFRACT, EPSI
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
+    current_time = time.time()
     log_timer = start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
