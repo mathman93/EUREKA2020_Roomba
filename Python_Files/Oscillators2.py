@@ -35,9 +35,9 @@ while True:
             print(message) # To see what the message is
             print(nodephase)
             if 0 < nodephase <= 180:
-                time1 += 5
+                time1 += nodephase/10
             if 180 < nodephase < threshold:
-                time1 -= 5
+                time1 -= nodephase/10
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
