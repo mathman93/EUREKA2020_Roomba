@@ -150,7 +150,7 @@ def delay_advance(file_prefix, file_path, master, start_phase, REFRACT, STRENGTH
     value = 0 #The value of the ossilator, which used to find phase
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
+    toWrite.append([time.time(), start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
@@ -257,7 +257,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
     value = 0 #The value of the ossilator, which used to find phase
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
+    toWrite.append([time.time(), start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
@@ -363,7 +363,7 @@ def M_and_S(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, B): #
     value = 0 #The value of the ossilator, which used to find phase
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
+    toWrite.append([time.time(), start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
@@ -480,7 +480,7 @@ def Reachback_Firefly(file_prefix, file_path, master, start_phase, REFRACT, EPSI
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     next_offset = 0 #Stores the offset value for the next cycle
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
+    toWrite.append([time.time(), start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
