@@ -4,7 +4,7 @@
 import csv
 import time
 import os
-#import serial
+import serial
 import math
 from copy import copy
 from random import uniform
