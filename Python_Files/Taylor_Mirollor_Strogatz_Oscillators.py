@@ -21,7 +21,7 @@ threshold = 360
 time1 = time.time()
 sendtimemin = 1
 epsilon = 1
-ScalingFactor = 72
+ScalingFactor = 48
 
 while True:
 
