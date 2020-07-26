@@ -6,6 +6,7 @@ import time
 import os
 import serial
 import math
+import socket
 from copy import copy
 from random import uniform
 
