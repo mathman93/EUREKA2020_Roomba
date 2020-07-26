@@ -31,7 +31,7 @@ while True:
 		if Xbee.inWaiting() > 0:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
-			phase = -math.sin((phase / 360) 2 * math.pi)(360 / 2 * math.pi)
+			phase = -math.sin((phase / 360) * (2 * math.pi)) * (360 / 2 * math.pi)
 
 
 	except KeyboardInterrupt:
