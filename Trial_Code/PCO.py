@@ -17,7 +17,7 @@ NODE_COUNT = 2 #Number of excpeted nodes on the network, if there are less, then
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-SIM_LENGTH = 30 #Time in seconds that each trial runs for
+SIM_LENGTH = 15 #Time in seconds that each trial runs for
 
 #Start serial communciation when import this module, b/c can do it now and will always be avaible for all functions
 global Xbee # Specifies connection to Xbee
