@@ -120,7 +120,7 @@ while True:
             toWrite.append([current_time, 360, heading, 1])
             toWrite.append([current_time, 0, heading, 0])
             #Reset start, log_timer, offset, and value
-            start = current_time #+ heading * (1/CONVERSION_FACTOR) #Its starting in the future, idiot (not the past)
+            start = current_time + heading * (1/CONVERSION_FACTOR) #Its starting in the future, idiot (not the past)
             actual_start = current_time #Uses this value to find if during the refractionary period
             log_timer = start + LOG_PERIOD
 ##            offset = 0
