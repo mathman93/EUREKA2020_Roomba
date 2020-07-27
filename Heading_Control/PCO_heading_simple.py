@@ -54,17 +54,17 @@ def sync_start(): #Used to sync the starting times of nodes
 if input('Sync start?'):
     ss = True
     try:
-        phs = float(input('Beginning Heading?'))
-        if REFRACT <= head <= PERIOD:
+        head = float(input('Beginning Heading?'))
+        if 0 <= head <= 360:
             pass
         else:
             raise ValueError('Out of acceptable range')
     except:
         print('Giving random val')
-        head = uniform(REFRACT, PERIOD)
+        head = uniform(0,360)
 else:
     print('Note, skipping sync start WILL cause headings not to sync\n You have been warned')
-    phs = uniform(0,PERIOD)
+    head = uniform(0,360)
     ss = False
 
 #Copy from Xbee_Read_Test.py to begin serial comunciation
@@ -97,7 +97,7 @@ toWrite = [] #2D list that is temp storage for logs
 #offset is now handled by heading
 heading = head #Used to store the 'heading' of an node -> only works with sync_start
 #Write intial conditions of osilator to file
-toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
+toWrite.append([time.time(), head / PERIOD * 360, 0, 0])
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
