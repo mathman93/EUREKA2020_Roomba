@@ -146,13 +146,14 @@ while True:
                 Type = Delay-Advance
                 Form = Wang Optimal Simple
                 '''
-                phase -= heading
                 if phase <= 180:
-                    heading += STRENGTH * -phase
+                    delta = STRENGTH * -phase
                 else:
-                    heading += STRENGTH * (360 - phase)
-                if heading > 360: heading = 0
-                elif heading < 0: heading = 360 #These 2 contional basicly let the phase 'loop around' the unit-circle
+                    delta = STRENGTH * (360 - phase)
+                phase -= heading #This is so if have to modify heading, then everything will work out
+                heading += delta 
+                if heading > 360: heading = 360
+                elif heading < 0: heading = 0
                 phase += heading
 
     #-----END PHASE RESPONSE ------
