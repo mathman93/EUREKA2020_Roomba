@@ -101,7 +101,7 @@ heading = head #Used to store the 'heading' of an node -> only works with sync_s
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
-start = time.time() - heading * (1/CONVERSION_FACTOR)#The start time of the current cycle
+start = time.time() + heading * (1/CONVERSION_FACTOR)#The start time of the current cycle
 actual_start = start #Uses this value to find if during the refractionary period
 log_timer = start + LOG_PERIOD #The time of the next periodic log
 #-------- Main Loop ---------
