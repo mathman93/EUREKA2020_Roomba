@@ -91,7 +91,9 @@ if ans != 'y':
                     i += 1
                 index = input('Choice index of the one you want ')
                 try:
-                    if 0 <= int(index) <= len(possible_files)-1:
+                    if index == 'n':
+                        print('skipping directory')
+                    elif 0 <= int(index) <= len(possible_files)-1:
                         filenames.append(possible_files[int(index)])
                 except:
                     print('Bad number, this is the end')
