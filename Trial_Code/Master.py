@@ -34,8 +34,8 @@ start_phase_tests = eval(open(phase_path).read())
 #delay_advance
 strength_tests = [0.1, 0.3, 0.5, 0.7, 0.9]
 #perskin, M+S, Reachback
-##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
-epsilon_tests = [0.1] #Testing the b value
+epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
+##epsilon_tests = [0.1] #Testing the b value
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
 gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
@@ -81,7 +81,8 @@ Reachback_info = {'prefix':'frb',
                   }
 
 ##method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
-method_dicts = [MS_info] #Only run DA for first tests
+method_dicts = [Reachback_info] #Only run DA for first tests
+#If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------
 master_dir = socket.gethostname() + '_' + time.strftime("%b%d") + '_' + time.strftime("%I%p%M")
