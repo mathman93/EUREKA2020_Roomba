@@ -153,7 +153,7 @@ while True:
                 phase -= heading #This is so if have to modify heading, then everything will work out
                 heading += delta 
                 if heading > 360: heading = 360
-                elif heading < 0: heading = 0
+                elif heading < 0: heading = 360 #Loop around to make heading matchs
                 phase += heading
 
     #-----END PHASE RESPONSE ------
