@@ -6,12 +6,13 @@ import glob
 
 plt.ioff()
 #Give file path for all the datas that want to plot
-rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_Jul27_12PM39', 'FireflyReachback')
-rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_Jul27_12PM39', 'FireflyReachback')
+rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_Jul27_10AM10', 'Delay_Advance')
+rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_Jul27_10AM10', 'Delay_Advance')
 #Manually drill down into each directory and create seperate lists IN ORDER of the data
 #I know should be better, but I need to get this done
 rp1_Files = []
 rp1_Paths = []
+print(rp1_path)
 for file in glob.glob(rp1_path + '/*.csv'):
     rp1_Paths.append(file)
     rp1_Files.append(os.path.basename(file))
@@ -20,6 +21,24 @@ rp2_Paths = []
 for file in glob.glob(rp2_path + '/*.csv'):
     rp2_Paths.append(file)
     rp2_Files.append(os.path.basename(file))
+
+##rp1_Files = []
+##rp1_Paths = []
+##for file in os.listdir(rp1_path):
+##    if 'txt' not in file:
+##        path = os.path.join(rp1_path, file)
+##        rp1_Paths.append(file)
+##        rp1_Files.append(os.path.basename(file))
+##rp2_Files = []
+##rp2_Paths = []
+##for file in os.listdir(rp2_path):
+##    if 'txt' not in file:
+##        path = os.path.join(rp2_path, file)
+##        rp2_Paths.append(file)
+##        rp2_Files.append(os.path.basename(file))
+
+
+
 
 #Check to make sure all the same files
 if rp1_Files == rp2_Files:
