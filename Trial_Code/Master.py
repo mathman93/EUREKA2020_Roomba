@@ -82,7 +82,7 @@ Reachback_info = {'prefix':'frb',
                   }
 
 ##method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
-method_dicts = [Reachback_info] #Only run DA for first tests
+method_dicts = [delay_advance_info] #Only run DA for first tests
 #If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------
