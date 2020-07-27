@@ -151,8 +151,8 @@ while True:
                     heading += STRENGTH * -phase
                 else:
                     heading += STRENGTH * (360 - phase)
-                if heading > 360: heading = 360
-                elif heading < 0: heading = 0
+                if heading > 360: heading = 0
+                elif heading < 0: heading = 360 #These 2 contional basicly let the phase 'loop around' the unit-circle
                 phase += heading
 
     #-----END PHASE RESPONSE ------
