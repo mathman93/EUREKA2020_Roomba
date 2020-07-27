@@ -1,0 +1,7 @@
+['frb11PM5932.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.005', 'Start_phase = 180']
+['frb11PM5957.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.01', 'Start_phase = 180']
+['frb12AM0022.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.02', 'Start_phase = 180']
+['frb12AM0047.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.05', 'Start_phase = 180']
+['frb12AM0112.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.1', 'Start_phase = 180']
+['frb12AM0137.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.3', 'Start_phase = 180']
+['frb12AM0202.csv', 'Type = Reachback Firefly', 'Function = Reachback Firefly (ln/e^)', 'Refract = 0.1', 'Epsilon = 0.5', 'Start_phase = 180']

@@ -1,0 +1,7 @@
+['ms11PM2046.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.005', 'B = 5', 'Start_phase = 180']
+['ms11PM2111.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.01', 'B = 5', 'Start_phase = 180']
+['ms11PM2136.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.02', 'B = 5', 'Start_phase = 180']
+['ms11PM2201.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.05', 'B = 5', 'Start_phase = 180']
+['ms11PM2226.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.1', 'B = 5', 'Start_phase = 180']
+['ms11PM2251.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.3', 'B = 5', 'Start_phase = 180']
+['ms11PM2316.csv', 'Type = Mirollor Strogatz (-ish)', 'Function = Mirollor Strogatz', 'Refract = 0.1', 'Epsilon = 0.5', 'B = 5', 'Start_phase = 180']

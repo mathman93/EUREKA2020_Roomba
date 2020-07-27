@@ -1,0 +1,3 @@
+Type = Reachback Firefly,Function = Reachback Firefly (ln/e^),Refract = 0.1,Epsilon = 0.001,Start_phase = 90
+Timestamp,Phase,Offset,Ping?
+1595824828.0407913,90,0,0

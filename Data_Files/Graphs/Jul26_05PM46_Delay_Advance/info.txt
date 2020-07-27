@@ -1,0 +1,1 @@
+First autonated trial. Here are the graphs that I recorded. These really just tested out the system and showed basicly that the more the coupling, the faster sync. Next run, I will decrease amount of time for collecting data to see if better looking results.
