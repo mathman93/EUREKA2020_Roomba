@@ -45,6 +45,11 @@ while True:
             x = (360/2) * (math.log1p((math.expm1(2) * (nodephase/360))))
             x += epsilon
             NodephasePlus = 360 * ((math.expm1(2 * (x/360)))/(math.expm1(2)))
+            if NodephasePlus > 360:
+                nodephase = threshold
+                message = "T"
+                Xbee.write(message.encode())
+                print("Pulse Sent")
             time1 -= (NodephasePlus - nodephase)/ScalingFactor
 
     ## Keyboard Interupt ##
