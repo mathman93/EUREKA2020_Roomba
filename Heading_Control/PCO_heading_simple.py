@@ -97,7 +97,7 @@ toWrite = [] #2D list that is temp storage for logs
 #offset is now handled by heading
 heading = head #Used to store the 'heading' of an node -> only works with sync_start
 #Write intial conditions of osilator to file
-toWrite.append([head, head, 0, 0])
+toWrite.append([current_time, head, head, 0])
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
