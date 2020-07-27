@@ -146,7 +146,7 @@ while True:
                 Type = Delay-Advance
                 Form = Wang Optimal Simple
                 '''
-                if phase <= 180:
+                if phase <= 180 and False:
                     delta = STRENGTH * -phase
                 else:
                     delta = STRENGTH * (360 - phase)
