@@ -86,7 +86,8 @@ method_dicts = [delay_advance_info] #Only run DA for first tests
 #If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------
-master_dir = socket.gethostname() + '_' + time.strftime("%b%d") + '_' + time.strftime("%I%p%M")
+name = input('Directory name?') #Use custom name so that easier to get all direcotries
+master_dir = socket.gethostname() + '_' + name
 #Main directory for the trial that houses all the data and such
 
 #Create the master_dir
