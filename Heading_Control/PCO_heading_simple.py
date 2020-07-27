@@ -11,7 +11,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-STRENGTH = .5 #Coe used with function to determine coupling strength?
+STRENGTH = .3 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 CONVERSION_FACTOR = 360 / PERIOD #Multiply by the time in order to find degs
 #eg value => phase OR seconds => degrees
@@ -97,7 +97,7 @@ toWrite = [] #2D list that is temp storage for logs
 #offset is now handled by heading
 heading = head #Used to store the 'heading' of an node -> only works with sync_start
 #Write intial conditions of osilator to file
-toWrite.append([time.time(), head, 0, 0])
+toWrite.append([head, head, 0, 0])
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
@@ -120,7 +120,7 @@ while True:
             toWrite.append([current_time, 360, heading, 1])
             toWrite.append([current_time, 0, heading, 0])
             #Reset start, log_timer, offset, and value
-            start = current_time + heading * (1/CONVERSION_FACTOR) #Its starting in the future, idiot (not the past)
+            start = current_time #+ heading * (1/CONVERSION_FACTOR) #Its starting in the future, idiot (not the past)
             actual_start = current_time #Uses this value to find if during the refractionary period
             log_timer = start + LOG_PERIOD
 ##            offset = 0
