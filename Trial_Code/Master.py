@@ -34,13 +34,14 @@ start_phase_tests = eval(open(phase_path).read())
 #delay_advance
 strength_tests = [0.1, 0.3, 0.5, 0.7, 0.9]
 #perskin, M+S, Reachback
-epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
+##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
+epsilon_tests = [0.1] #Testing the b value
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
 gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
 #M+S
-#b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
-b_tests = [5] #Just testing epsilon
+b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
+#b_tests = [5] #Just testing epsilon
 
 
 #-------------------------------- File Naming --------------------------------
