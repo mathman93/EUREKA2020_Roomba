@@ -72,7 +72,7 @@ global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 
 #Data file creation and such
-fname = socket.gethostname() + '_' + 'DA' + '_' + time.strftime("%b%d_%H%M%S", time.gmtime()) + '.csv'
+fname = socket.gethostname() + '_' + 'DA' + '_' + time.strftime("%b%d%Y_%H%M%S", time.gmtime()) + '.csv'
 #That time format is stolen from Xbee_Read_Test ;)
 #Write files to non-github localtion on pis
 path = os.path.join('..', '..', 'PCO_Data', fname)
@@ -97,7 +97,7 @@ toWrite = [] #2D list that is temp storage for logs
 #offset is now handled by heading
 heading = head #Used to store the 'heading' of an node -> only works with sync_start
 #Write intial conditions of osilator to file
-toWrite.append([time.time(), head / PERIOD * 360, 0, 0])
+toWrite.append([time.time(), head, 0, 0])
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
