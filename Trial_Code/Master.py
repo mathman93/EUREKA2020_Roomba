@@ -23,7 +23,7 @@ import PCO
 #-------------------------------- Parameters --------------------------------
 #Global
 #refract_tests = [0, 0.01, 0.05, 0.1, 0.2] #IN SECONDS
-refract_tests = [0.1]
+refract_tests = [0]
 
 #TODO - Read starting phases from file
 #This file is a python list, located in the hostname folder with the name bellow

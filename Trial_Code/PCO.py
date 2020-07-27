@@ -10,7 +10,7 @@ import socket
 from copy import copy
 from random import uniform
 
-NODE_COUNT = 2 #Number of excpeted nodes on the network, if there are less, then retry to sync
+NODE_COUNT = 3 #Number of excpeted nodes on the network, if there are less, then retry to sync
 
 #These bellow will be the same for all tests as they should not effect data
 #HOWEVER, in the future might experiment with changing
@@ -87,6 +87,7 @@ def sync_start(master):
                             break
                 if not skip: #Final check
                     return start #All good to go and start
+                skip = False
 
         #In case of a user reset to the syncs sequence:
         except KeyboardInterrupt:
