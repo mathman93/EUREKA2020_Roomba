@@ -46,6 +46,7 @@ while True:
                 heading -= nodephase/12
             if 180 < nodephase < threshold:
                 heading += (threshold - nodephase)/12
+            print("The heading is %f" % heading)
 
         ## Heading Cannot be Greater Than 360 ##
         if heading >= 360:
