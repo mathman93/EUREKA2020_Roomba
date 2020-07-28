@@ -13,6 +13,7 @@ threshold = 360
 
 ## Main Code ##
 time1 = time.time()
+time2 = 0
 sendtimemin = 1
 
 while True:
@@ -20,6 +21,11 @@ while True:
     try:
         ## Increasing the phase value ##
         nodephase = (time.time() - time1) * 12
+
+        ## Prints phase at a regular time interval
+        if time.time() - time2 > 10:
+            print("{0:.3f}".format(nodephase))
+            time2 += 10
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
