@@ -66,7 +66,7 @@ if input('Sync start?'):
         phs = uniform(REFRACT, PERIOD)
     #Set duration
     try:
-        duration = int(input('Duration? '))
+        DURATION = int(input('Duration? '))
     except:
         print('Duration set to 30secs')
         DURATION = 30
