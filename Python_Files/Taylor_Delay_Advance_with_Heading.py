@@ -32,18 +32,18 @@ while True:
             message = "T"
             Xbee.write(message.encode()) #Send the letter over the Xbee
             print("Pulse Sent")
-            print(nodephase)
+            print("The phase value is: %f" % nodephase)
 
         ## Receiving Pulses and Adjusting Phase Value ##
         if Xbee.inWaiting() > 0: # If there is something in the receive buffer of the Xbee for oscillator 1
             message = Xbee.read(Xbee.inWaiting()).decode() # Read all data in
             print(message) # To see what the message is
-            print(nodephase)
+            print("The phase value is: %f" % nodephase)
             if 0 < nodephase <= 180:
                 heading -= nodephase/12
             if 180 < nodephase < threshold:
                 heading += (threshold - nodephase)/12
-            print("The heading is: %s" % heading)
+            print("The heading is: %f" % heading)
 
         ## Heading Cannot be Greater Than 360 ##
         if heading >= 360:
@@ -53,8 +53,10 @@ while True:
         if angle != heading:
             if heading > angle:
                 angle += 5
+                print("The angle is: %f" % angle)
             if heading < angle:
                 angle -= 5
+                print("The angle is: %f" % angle)
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
