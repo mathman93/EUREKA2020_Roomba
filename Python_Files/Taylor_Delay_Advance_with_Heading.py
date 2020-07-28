@@ -52,10 +52,10 @@ while True:
         ## Adjusting Angle to Get Closer to Heading ##
         if angle != heading:
             if heading > angle:
-                angle += 5
+                angle += heading/5
                 print("The angle is: %f" % angle)
             if heading < angle:
-                angle -= 5
+                angle -= heading/5
                 print("The angle is: %f" % angle)
 
     ## Keyboard Interupt ##
