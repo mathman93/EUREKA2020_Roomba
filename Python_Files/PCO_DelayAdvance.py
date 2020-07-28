@@ -50,6 +50,8 @@ def sync_start(): #Used to sync the starting times of nodes
 # ---- Init ----
 
 #Get some starting information
+#This insures that all the files will have same name when trying to graph
+file_sufix = input('Enter file sufix: ')
 if input('Sync start?'):
     ss = True
     try:
@@ -71,7 +73,7 @@ global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 
 #Data file creation and such
-fname = socket.gethostname() + '_' + 'DA' + '_' + time.strftime("%B %d, %Y, %H_%M_%S", time.gmtime()) + '.csv'
+fname = socket.gethostname() + '_' + file_sufix + '.csv'
 #That time format is stolen from Xbee_Read_Test ;)
 #Write files to non-github localtion on pis
 path = os.path.join('..', '..', 'PCO_Data', fname)
