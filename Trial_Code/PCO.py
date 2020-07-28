@@ -69,22 +69,27 @@ def sync_start(master):
                 skip = False
                 while True:
                     if Xbee.inWaiting() > 0:
-                        try: #This try/except is to handle if a quit signal is recieved before a time
-                            start = int(Xbee.read(Xbee.inWaiting()).decode())
-                        except:
-                            print('Recieved quit before a start time -> restarting sync')
+                        x = Xbee.read(Xbee.inWaiting()).decode()
+                        if x == 'q': #Handle the quit case
                             skip = True #Used to get out of the next while loop
-                        print('Start in ' + str(start - int(time.time())))
-                        Xbee.write(socket.gethostname().encode())
-                        break
+                            print('Recieved a quit signal -> restarting sync')
+                            break
+                        try: #This try/except is to handle if receive a singal from another node
+                            start = int(Xbee.read(Xbee.inWaiting()).decode())
+                            print('Start in ' + str(start - int(time.time())))
+                            Xbee.write(socket.gethostname().encode())
+                            break
+                        except:
+                            pass
                 if not skip: #Used to check if be got an error eariler and therefore should skip the next sync step
                     #Now wait for the start, while looking for a quit signal
                     while time.time() < start:
                         if Xbee.inWaiting() > 0:
-                            Xbee.read(Xbee.inWaiting()) #This is most likely a quit, if not then still reset
-                            print('Recieved a quit signal -> restarting sync')
-                            skip = True #Used to cause a reset and not satify next conditional
-                            break
+                            x = Xbee.read(Xbee.inWaiting()).decode()
+                            if x == 'q': #Handle the quit case
+                                skip = True #Used to get out of the next while loop
+                                print('Recieved a quit signal -> restarting sync')
+                                break
                 if not skip: #Final check
                     return start #All good to go and start
                 skip = False
