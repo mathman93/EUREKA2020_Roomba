@@ -48,9 +48,9 @@ elif x in ['1', '2', '3']:
                 i += 1
             index = input('Choice index of the one you want ')
             try:
-                if 0 <= int(index) <= len(possible_files)-1:
+                if 0 <= int(index) <= len(suffixes)-1:
                     print('Found suffix, getting data and graphing')
-                    file_suffix = suffixes[int(index)])
+                    file_suffix = suffixes[int(index)]
                     break
                 else:
                     print('Invalid, try another index or search by suffix')
@@ -140,7 +140,7 @@ if old_way == True:
 
 print(filenames)
                      
-colors = ['r', 'b', 'g', 'c', 'm', 'y']
+colors = ['r', 'b', 'y', 'c', 'm', 'g']
 i = 0
 for fm in filenames:
     if fm:

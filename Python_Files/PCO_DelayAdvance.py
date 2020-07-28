@@ -11,7 +11,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-STRENGTH = .6 #Coe used with function to determine coupling strength?
+STRENGTH = .3 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 
 
@@ -54,8 +54,9 @@ def sync_start(): #Used to sync the starting times of nodes
 file_sufix = input('Enter file sufix: ')
 if input('Sync start?'):
     ss = True
+    #Set intial phase
     try:
-        phs = float(input('Beginning Val?'))
+        phs = float(input('Beginning Val? '))
         if REFRACT <= phs <= PERIOD:
             pass
         else:
@@ -63,6 +64,12 @@ if input('Sync start?'):
     except:
         print('Giving random val')
         phs = uniform(REFRACT, PERIOD)
+    #Set duration
+    try:
+        duration = int(input('Duration? '))
+    except:
+        print('Duration set to 30secs')
+        DURATION = 30
 else:
     print('Note, skipping Sync start might cause nodes not to sync based on refract length')
     phs = uniform(0,PERIOD)
@@ -99,9 +106,11 @@ toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
 start = time.time() #The start time of the current cycle
+PCO_start = start #The time the ossilator began
+current_time = start #Used so that first interation of while loop works
 log_timer = start + LOG_PERIOD #The time of the next periodic log
 #-------- Main Loop ---------
-while True:
+while PCO_start + DURATION > current_time:
     try:
         #Update value
         current_time = time.time()
