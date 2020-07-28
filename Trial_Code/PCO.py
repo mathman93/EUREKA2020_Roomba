@@ -75,7 +75,7 @@ def sync_start(master):
                             print('Recieved a quit signal -> restarting sync')
                             break
                         try: #This try/except is to handle if receive a singal from another node
-                            start = int(Xbee.read(Xbee.inWaiting()).decode())
+                            start = int(x)
                             print('Start in ' + str(start - int(time.time())))
                             Xbee.write(socket.gethostname().encode())
                             break
