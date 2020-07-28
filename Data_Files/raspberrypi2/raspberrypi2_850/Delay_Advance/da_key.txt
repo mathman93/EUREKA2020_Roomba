@@ -1,0 +1,5 @@
+['da08PM5058.csv', 'Type = DelayAdvance', 'Function = Wang Sync Simple', 'Refract = 0', 'Coupling Strength = 0.1', 'Start_phase = 90']
+['da08PM5123.csv', 'Type = DelayAdvance', 'Function = Wang Sync Simple', 'Refract = 0', 'Coupling Strength = 0.3', 'Start_phase = 90']
+['da08PM5156.csv', 'Type = DelayAdvance', 'Function = Wang Sync Simple', 'Refract = 0', 'Coupling Strength = 0.5', 'Start_phase = 90']
+['da08PM5221.csv', 'Type = DelayAdvance', 'Function = Wang Sync Simple', 'Refract = 0', 'Coupling Strength = 0.7', 'Start_phase = 90']
+['da08PM5246.csv', 'Type = DelayAdvance', 'Function = Wang Sync Simple', 'Refract = 0', 'Coupling Strength = 0.9', 'Start_phase = 90']
