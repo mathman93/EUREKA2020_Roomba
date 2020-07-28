@@ -22,7 +22,7 @@ while True:
 
     try:
         ## Increasing the phase value ##
-        nodephase = heading + (time.time() - time1)
+        nodephase = heading + ((time.time() - time1) * 12)
 
 
 
