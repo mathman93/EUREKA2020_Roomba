@@ -16,7 +16,7 @@ time1 = time.time()
 time2 = 0
 sendtimemin = 1
 angle = 0 # Actual angle the robot is facing
-heading = 90
+heading = 0
 
 while True:
 
