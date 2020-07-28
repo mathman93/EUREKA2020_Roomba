@@ -44,19 +44,18 @@ while True:
             if 180 < nodephase < threshold:
                 heading += (threshold - nodephase)/20
             print("The heading is: %f" % heading)
-
-        ## Heading Cannot be Greater Than 360 ##
-        if heading >= 360:
-            heading = 0
+            if angle != heading:
+                if heading > angle:
+                    angle += heading/5
+                    print("The angle is: %f" % angle)
+                if heading < angle:
+                    angle -= heading/5
+                    print("The angle is: %f" % angle)
+            if heading >= 360:
+                heading = 0
 
         ## Adjusting Angle to Get Closer to Heading ##
-        if angle != heading:
-            if heading > angle:
-                angle += heading/5
-                print("The angle is: %f" % angle)
-            if heading < angle:
-                angle -= heading/5
-                print("The angle is: %f" % angle)
+
 
     ## Keyboard Interupt ##
     except KeyboardInterrupt:
