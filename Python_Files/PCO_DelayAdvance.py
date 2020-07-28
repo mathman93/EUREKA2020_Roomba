@@ -68,8 +68,8 @@ if input('Sync start?'):
     try:
         DURATION = int(input('Duration? '))
     except:
-        print('Duration set to 30secs')
-        DURATION = 30
+        print('Duration set to 20 secs')
+        DURATION = 20
 else:
     print('Note, skipping Sync start might cause nodes not to sync based on refract length')
     phs = uniform(0,PERIOD)
@@ -101,7 +101,7 @@ value = 0 #The value of the ossilator, which used to find phase
 offset = phs #The increase to value caused by phase shifts (or inital conditions)
 head = 0 #Used to store the 'heading' of an node -> only works with sync_start
 #Write intial conditions of osilator to file
-toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
+##toWrite.append([time.time(), phs / PERIOD * 360, 0, 0])
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
