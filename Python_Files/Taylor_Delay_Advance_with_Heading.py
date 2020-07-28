@@ -40,9 +40,9 @@ while True:
             print(message) # To see what the message is
             print("The phase value is: %f" % nodephase)
             if 0 < nodephase <= 180:
-                heading -= nodephase/12
+                heading -= nodephase/20
             if 180 < nodephase < threshold:
-                heading += (threshold - nodephase)/12
+                heading += (threshold - nodephase)/20
             print("The heading is: %f" % heading)
 
         ## Heading Cannot be Greater Than 360 ##
