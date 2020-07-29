@@ -8,23 +8,23 @@ import serial
 global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 #Starting phase angle
-nodephase = int(input("Please enter a starting phase value: "))
+heading = int(input("Please enter your heading: "))
 threshold = 360
+frequency = 12
+CycleTime = 30
 
 ## Main Code ##
-time1 = time.time()
-time2 = 0
-sendtimemin = 1
-angle = 0 # Actual angle the robot is facing
+Time1 = 0
+OldTime = time.time() - (time.time() % CycleTime)
 heading = 0
 
 while True:
 
     try:
         ## Increasing the phase value ##
-        nodephase = heading + ((time.time() - time1) * 12)
-
-
+        NewTime = time.time()
+        Time1 = NewTime - OldTiem
+        nodephase = heading + (Time1 * frequency)
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
