@@ -178,8 +178,8 @@ while PCO_start + DURATION > current_time:
                     #Adjusting timer
                     #Calculate deg to reaching maximum
                     x = (360 + heading) - phase
-                    #x will always be less than 180 b/c phase requirements?
-                    delta = STRENGTH * -x
+                    #x will always needs to increase?
+                    delta = STRENGTH * x
                     start += delta
                     
                 phase += delta
