@@ -11,11 +11,11 @@ Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 heading = int(input("Please enter your heading: "))
 threshold = 360
 frequency = 12
-CycleTime = 30
+CycleTime = threshold/frequency
 
 ## Main Code ##
-Time1 = 0
-OldTime = time.time() - (time.time() % CycleTime)
+time1 = time.time() - (time.time() % CycleTime)
+Timer = 0
 heading = 0
 nodephase = 0
 
@@ -23,14 +23,13 @@ while True:
 
     try:
         ## Increasing the phase value ##
-        NewTime = time.time()
-        Time1 = NewTime - OldTime
-        nodephase = heading + (Time1 * frequency)
+        Timer = time.time() - time1
+        nodephase = heading + (Timer * frequency)
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
-            Time1 -= CycleTime
-            OldTime = time.time() - (time.time() % CycleTime)
+            Timer -= CycleTime
+            time1 = time.time() - (time.time() % CycleTime)
             message = "T"
             Xbee.write(message.encode()) #Send the letter over the Xbee
             print("Pulse Sent")
