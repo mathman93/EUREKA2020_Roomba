@@ -166,14 +166,23 @@ while PCO_start + DURATION > current_time:
                 Type = Delay-Advance
                 Form = Wang Optimal Simple
                 '''
-                x = phase % 360 #Used in this implenation to calculate shifts
-                if x <= 180:
+                if phase > 360:
+                    #Adjusting Heading
+                    x = phase % 360 #Used in this implenation to calculate shifts
+                    if x <= 180:
+                        delta = STRENGTH * -x
+                    else:
+                        delta = STRENGTH * (360 - x)
+                    heading += delta
+                elif:
+                    #Adjusting timer
+                    #Calculate deg to reaching maximum
+                    x = (360 + heading) - phase
+                    #x will always be less than 180 b/c phase requirements?
                     delta = STRENGTH * -x
-                else:
-                    delta = STRENGTH * (360 - x)
-                heading += delta
+                    timer += delta
+                    
                 phase += delta
-                #Just recalculate this as would at the top of loop
 
     #-----END PHASE RESPONSE ------
 
