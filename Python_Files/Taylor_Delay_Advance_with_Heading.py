@@ -44,17 +44,14 @@ while True:
             if 180 < nodephase < threshold:
                 heading += (threshold - nodephase)/20
             print("The heading is: %f" % heading)
-            if angle != heading:
-                if heading > angle:
-                    angle += heading/5
-                    print("The angle is: %f" % angle)
-                if heading < angle:
-                    angle -= heading/5
-                    print("The angle is: %f" % angle)
             if heading >= 360:
-                heading = 0
-
-        ## Adjusting Angle to Get Closer to Heading ##
+                heading -= 360
+                #add equivelent of 360 to timer
+            if heading <= 0:
+                heading += 360
+                #subtract the equivelent of 360 from timer
+        
+    ## Adjusting Angle to Get Closer to Heading ##
 
 
     ## Keyboard Interupt ##
