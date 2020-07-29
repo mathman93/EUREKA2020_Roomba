@@ -113,6 +113,7 @@ start = time.time() #The start time of the current cycle
 PCO_start = start #The time the ossilator began
 current_time = start #Used so that first interation of while loop works
 log_timer = start + LOG_PERIOD #The time of the next periodic log
+pinged = False #Used to store if the ossilator has pinged this ossilation
 #-------- Main Loop ---------
 while PCO_start + DURATION > current_time:
     try:
@@ -122,12 +123,13 @@ while PCO_start + DURATION > current_time:
         #Remember to convert the time to phase equivalent (eg change from 0-PERIOD sec -> 0-360 deg)
 
         #Check if need to pulse and then send pulse
-        if phase >= 360:
+        if phase >= 360 and not pinged:
             Xbee.write(str(1).encode())
             #Write info
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, 360, heading, 1])
             #THERE ARE NO RESETS as the resets happen when timer reaches 360
+            pinged = True #So that PCO does not continiously ping
 
         #Check if timer has reached the end of period
         if current_time - start >= PERIOD:
@@ -138,6 +140,7 @@ while PCO_start + DURATION > current_time:
             phase = heading
             start = current_time
             log_timer = start + LOG_PERIOD
+            pinged = False #Reset so that the ossilation can ping again
 
         #Check for signals on the line -> if there is either end loop b/c synced
         #OR if not during refraction, then phase shift
