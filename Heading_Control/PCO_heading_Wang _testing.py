@@ -107,6 +107,8 @@ phase = heading #Set intial condition to head
 #Write intial conditions of osilator to file
 toWrite.append([time.time(), phase, heading, 0])
 
+offset = 0
+
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
 start = time.time() #The start time of the current cycle
@@ -119,7 +121,7 @@ while PCO_start + DURATION > current_time:
     try:
         #Update value
         current_time = time.time()
-        phase = (current_time - start) * CONVERSION_FACTOR + heading #Set the phase
+        phase = (current_time - start) * CONVERSION_FACTOR + heading + offset #Set the phase
         #Remember to convert the time to phase equivalent (eg change from 0-PERIOD sec -> 0-360 deg)
 
         #Check if need to pulse and then send pulse
@@ -143,6 +145,7 @@ while PCO_start + DURATION > current_time:
             phase = heading
             start = current_time
             log_timer = start + LOG_PERIOD
+            offset = 0
             pinged = False #Reset so that the ossilation can ping again
             #In order to keep heading restricted, subtract 360 if heading > 360
             if heading > 360:
@@ -180,7 +183,7 @@ while PCO_start + DURATION > current_time:
                     x = (360 + heading) - phase
                     #x will always needs to increase?
                     delta = STRENGTH * x
-                    start += delta
+                    offset += delta
                     
                 phase += delta
 
