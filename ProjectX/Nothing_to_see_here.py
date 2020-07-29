@@ -19,7 +19,7 @@ PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
 STRENGTH = .7 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
-CONVERSION_FACTOR = float(360 / PERIOD) #Multiply by the time in order to find degs
+CONVERSION_FACTOR = (360.0 / PERIOD) #Multiply by the time in order to find degs
 #eg value => phase OR seconds => degrees
 
 
