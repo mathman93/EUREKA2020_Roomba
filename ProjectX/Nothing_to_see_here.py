@@ -108,10 +108,10 @@ if ss: sync_start() #Try to set global time for all the nodes to start at
 
 toWrite = [] #2D list that is temp storage for logs
 heading = head #Used to store the 'heading' of an node -> only works with sync_start
-phase = heading #Set intial condition to head
-timer = 0 #Used to sort the time sense the start of the ossilation
+timer_phase = 0
+heading_phase = timer_phase + heading
 #Write intial conditions of osilator to file
-toWrite.append([time.time(), phase, heading, 0, timer, 0])
+toWrite.append([time.time(), heading_phase, heading, 0, timer_phase, 0])
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
@@ -177,7 +177,7 @@ while PCO_start + DURATION > current_time:
                 #And default to timer sync, as that is more important
                 if 't' in message:
                 #Have phase response adjust timer value, like heading not exsist
-                    if timer <= 180:
+                    if timer_phase <= 180:
                         delta = STRENGTH * -timer_phase
                     else:
                         delta = STRENGTH * (360 - timer_phase)
@@ -207,7 +207,7 @@ while PCO_start + DURATION > current_time:
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, heading_phase, timer_phase, 0, timer, 0])
+            toWrite.append([current_time, heading_phase, heading, 0, timer_phase, 0])
             log_timer += LOG_PERIOD
 
 
