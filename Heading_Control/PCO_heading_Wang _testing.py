@@ -174,7 +174,7 @@ while PCO_start + DURATION > current_time:
                     else:
                         delta = STRENGTH * (360 - x)
                     heading += delta
-                elif:
+                else:
                     #Adjusting timer
                     #Calculate deg to reaching maximum
                     x = (360 + heading) - phase
