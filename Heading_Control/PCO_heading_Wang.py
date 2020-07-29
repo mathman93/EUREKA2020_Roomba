@@ -164,7 +164,7 @@ while PCO_start + DURATION > current_time:
                 Form = Wang Optimal Simple
                 '''
                 x = phase % 360 #Used in this implenation to calculate shifts
-                if x <= 180 and False:
+                if x <= 180:
                     delta = STRENGTH * -x
                 else:
                     delta = STRENGTH * (360 - x)
