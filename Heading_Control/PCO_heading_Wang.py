@@ -11,7 +11,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-STRENGTH = .3 #Coe used with function to determine coupling strength?
+STRENGTH = .7 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 CONVERSION_FACTOR = 360 / PERIOD #Multiply by the time in order to find degs
 #eg value => phase OR seconds => degrees
@@ -130,6 +130,10 @@ while PCO_start + DURATION > current_time:
             toWrite.append([current_time, 360, heading, 1])
             #THERE ARE NO RESETS as the resets happen when timer reaches 360
             pinged = True #So that PCO does not continiously ping
+            #In order to keep heading restricted, subtract 360 if heading > 360
+            if heading > 360:
+                heading -= 360
+
 
         #Check if timer has reached the end of period
         if current_time - start >= PERIOD:
@@ -166,10 +170,7 @@ while PCO_start + DURATION > current_time:
                 else:
                     delta = STRENGTH * (360 - x)
                 heading += delta
-                #In order to keep heading restricted, subtract 360 if heading > 360
-                if heading > 360:
-                    heading -= 360
-                phase = (current_time - start) * CONVERSION_FACTOR + heading
+                phase += delta
                 #Just recalculate this as would at the top of loop
 
     #-----END PHASE RESPONSE ------
