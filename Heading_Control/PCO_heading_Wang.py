@@ -130,9 +130,6 @@ while PCO_start + DURATION > current_time:
             toWrite.append([current_time, 360, heading, 1])
             #THERE ARE NO RESETS as the resets happen when timer reaches 360
             pinged = True #So that PCO does not continiously ping
-            #In order to keep heading restricted, subtract 360 if heading > 360
-            if heading > 360:
-                heading -= 360
 
 
         #Check if timer has reached the end of period
@@ -145,6 +142,9 @@ while PCO_start + DURATION > current_time:
             start = current_time
             log_timer = start + LOG_PERIOD
             pinged = False #Reset so that the ossilation can ping again
+            #In order to keep heading restricted, subtract 360 if heading > 360
+            if heading > 360:
+                heading -= 360
 
         #Check for signals on the line -> if there is either end loop b/c synced
         #OR if not during refraction, then phase shift
