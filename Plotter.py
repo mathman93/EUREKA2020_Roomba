@@ -151,7 +151,7 @@ for fm in filenames:
             for row in reader:
                 try:
                     x.append(float(row[0]))
-                    y.append(float(row[1]))
+                    y.append(float(row[4]))
                 except:
                     print('Help')
                 #Graph phase value

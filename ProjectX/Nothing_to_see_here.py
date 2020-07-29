@@ -121,7 +121,6 @@ current_time = start #Used so that first interation of while loop works
 log_timer = start + LOG_PERIOD #The time of the next periodic log
 pinged = False #Used to store if the ossilator has pinged this ossilation
 offset = 0 #Bringing it back so that can have clock shifts
-head_offset = heading #So that the heading ossilator part stays in range 0-360
 #-------- Main Loop ---------
 while PCO_start + DURATION > current_time:
     try:
@@ -132,14 +131,14 @@ while PCO_start + DURATION > current_time:
         heading_phase = (timer_phase + heading) % 360  #To keep in range 0-360
         #Remember to convert the time to phase equivalent (eg change from 0-PERIOD sec -> 0-360 deg)
 
-        #Check if need heading pulse based on if the heading phase (w/o %) is large enough
-        if timer_phase + heading >= 360 and not pinged:
-            #This is a heading pulse
-            Xbee.write('h'.encode())
-            #Write info
-            toWrite.append([current_time, heading_phase, heading, 1, timer_phase, 0])
-            #Modulo operator will take care of the resseting phase
-            pinged = True #So that PCO does not continiously ping
+##        #Check if need heading pulse based on if the heading phase (w/o %) is large enough
+##        if timer_phase + heading >= 360 and not pinged:
+##            #This is a heading pulse
+##            Xbee.write('h'.encode())
+##            #Write info
+##            toWrite.append([current_time, heading_phase, heading, 1, timer_phase, 0])
+##            #Modulo operator will take care of the resseting phase
+##            pinged = True #So that PCO does not continiously ping
 
 
         #Check if timer has reached the end of period
@@ -186,20 +185,20 @@ while PCO_start + DURATION > current_time:
                     timer_phase += delta
                     heading_phase += delta
 
-                else:
-                    #Just adjust the heading as you would normally
-    #-----PHASE RESPONSE PART------
-                    '''
-                    Type = Delay-Advance
-                    Form = Wang Optimal Simple
-                    '''
-                    x = phase % 360 #Used in this implenation to calculate shifts
-                    if x <= 180:
-                        delta = STRENGTH * -x
-                    else:
-                        delta = STRENGTH * (360 - x)
-                    heading += delta
-                    heading_phase += delta
+##                else:
+##                    #Just adjust the heading as you would normally
+##    #-----PHASE RESPONSE PART------
+##                    '''
+##                    Type = Delay-Advance
+##                    Form = Wang Optimal Simple
+##                    '''
+##                    x = phase % 360 #Used in this implenation to calculate shifts
+##                    if x <= 180:
+##                        delta = STRENGTH * -x
+##                    else:
+##                        delta = STRENGTH * (360 - x)
+##                    heading += delta
+##                    heading_phase += delta
 
     #-----END PHASE RESPONSE ------
 
