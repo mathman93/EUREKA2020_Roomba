@@ -46,11 +46,11 @@ while True:
                 heading += (threshold - nodephase)/20
             if heading >= 360:
                 heading -= 360
-                Time1 += CycleTime
+                Timer += CycleTime
                 print("The heading is: %f" % heading)
             if heading <= 0:
                 heading += 360
-                Time1 -= CycleTime
+                Timer -= CycleTime
                 print("The heading is: %f" % heading)
         
     ## Adjusting Angle to Get Closer to Heading ##
