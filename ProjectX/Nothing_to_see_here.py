@@ -176,9 +176,9 @@ while PCO_start + DURATION > current_time:
                 if 't' in message:
                 #Have phase response adjust timer value, like heading not exsist
                     if timer <= 180:
-                        delta = STRENGTH * -x
+                        delta = STRENGTH * -timer
                     else:
-                        delta = STRENGTH * (360 - x)
+                        delta = STRENGTH * (360 - timer)
                     offset += delta
                     timer += delta
                     phase += delta
