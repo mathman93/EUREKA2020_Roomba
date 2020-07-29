@@ -154,8 +154,15 @@ for fm in filenames:
                     y.append(float(row[1]))
                 except:
                     print('Help')
+                #Graph phase value
                 if row[3] == str(1):
-                    plt.plot(float(row[0]), float(row[1]), marker='o')
+                    plt.plot(float(row[0]), float(row[1]), marker='go')
+                #Graph timer pulses
+                try:
+                    if row[5] == str(1):
+                    plt.plot(float(row[0]), float(row[1]), marker='mo')
+                except:
+                    pass
             plt.plot(x,y,colors[i])
             i += 1
 
