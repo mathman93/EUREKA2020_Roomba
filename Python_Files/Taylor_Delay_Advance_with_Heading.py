@@ -51,6 +51,7 @@ while True:
                 heading += 360
                 Timer -= CycleTime
                 print("The heading is: %f" % heading)
+            time1 = time.time() - (time.time() % CycleTime)
             print("The phase value is: %f" % nodephase)
         
     ## Adjusting Angle to Get Closer to Heading ##
