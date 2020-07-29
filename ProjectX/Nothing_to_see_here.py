@@ -142,7 +142,7 @@ while PCO_start + DURATION > current_time:
 
 
         #Check if timer has reached the end of period
-        if timer >= PERIOD:
+        if timer >= 360:
             #Send timer pulse to other nodes (t)
             Xbee.write('t'.encode())
             #Store both the top and bottom of a ping for better graphs
