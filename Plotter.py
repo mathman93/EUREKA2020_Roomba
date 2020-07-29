@@ -156,11 +156,11 @@ for fm in filenames:
                     print('Help')
                 #Graph phase value
                 if row[3] == str(1):
-                    plt.plot(float(row[0]), float(row[1]), marker='go')
+                    plt.plot(float(row[0]), float(row[1]), marker='o', color='g')
                 #Graph timer pulses
                 try:
                     if row[5] == str(1):
-                    plt.plot(float(row[0]), float(row[1]), marker='mo')
+                        plt.plot(float(row[0]), float(row[1]), marker='o', color='m')
                 except:
                     pass
             plt.plot(x,y,colors[i])
