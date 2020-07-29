@@ -28,7 +28,7 @@ while True:
 
         ## Reaching the Threshold and Sending Pulses ##
         if nodephase >= threshold:
-            time1 = time.time()
+            Time1 -= CycleTime
             message = "T"
             Xbee.write(message.encode()) #Send the letter over the Xbee
             print("Pulse Sent")
@@ -41,15 +41,16 @@ while True:
             print("The phase value is: %f" % nodephase)
             if 0 < nodephase <= 180:
                 heading -= nodephase/20
-            if 180 < nodephase < threshold:
+            if 180 < nodephase <+ threshold:
                 heading += (threshold - nodephase)/20
-            print("The heading is: %f" % heading)
             if heading >= 360:
                 heading -= 360
-                #add equivelent of 360 to timer
+                Time1 += CycleTime
+                print("The heading is: %f" % heading)
             if heading <= 0:
                 heading += 360
-                #subtract the equivelent of 360 from timer
+                Time1 -= CycleTime
+                print("The heading is: %f" % heading)
         
     ## Adjusting Angle to Get Closer to Heading ##
 
