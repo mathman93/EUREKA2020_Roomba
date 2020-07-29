@@ -136,8 +136,6 @@ while PCO_start + DURATION > current_time:
 
         #Check if timer has reached the end of period
         if current_time - start >= PERIOD:
-            #Lets also ping here and see what happens
-            Xbee.write(str(1).encode())
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, phase, heading, 0])
             toWrite.append([current_time, 0, heading, 0])
@@ -208,8 +206,6 @@ if input('Wait to print out firing times and heading values?'):
     for line in toWrite:
         if line[3]:
             print(line[0], ' ', line[2])
-if input('Keep Data?'):
-    file.close()
 Xbee.close()
 
 
