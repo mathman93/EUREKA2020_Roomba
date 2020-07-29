@@ -92,7 +92,7 @@ path = os.path.join('..', '..', 'PCO_Data', fname)
 file = open(path, 'w', newline='')
 csvWriter = csv.writer(file) #The object to write in csv format to the file
 #Header for the file that defines what is in each column
-csvWriter.writerow(['Timestamp', 'Phase', 'Heading', 'HeadPing?', 'Timer', 'TimerPing?'])
+csvWriter.writerow(['Timestamp', 'HeadingPhase', 'Heading', 'HeadPing?', 'TimerPhase', 'TimerPing?'])
 
 if ss: sync_start() #Try to set global time for all the nodes to start at
 #----- END OF INIT -------
@@ -121,37 +121,40 @@ current_time = start #Used so that first interation of while loop works
 log_timer = start + LOG_PERIOD #The time of the next periodic log
 pinged = False #Used to store if the ossilator has pinged this ossilation
 offset = 0 #Bringing it back so that can have clock shifts
+head_offset = heading #So that the heading ossilator part stays in range 0-360
 #-------- Main Loop ---------
 while PCO_start + DURATION > current_time:
     try:
         #Update timer
         current_time = time.time()
-        timer = (current_time - start) * CONVERSION_FACTOR + offset
-        #Set the phase
-        phase = timer + heading
+        timer_phase = (current_time - start) * CONVERSION_FACTOR + offset
+        #Set heading phase as function of timer_phase
+        heading_phase = (timer_phase + heading) % 360  #To keep in range 0-360
         #Remember to convert the time to phase equivalent (eg change from 0-PERIOD sec -> 0-360 deg)
 
-        #Check if need to pulse and then send pulse
-        if phase >= 360 and not pinged:
+        #Check if need heading pulse based on if the heading phase (w/o %) is large enough
+        if timer_phase + heading >= 360 and not pinged:
             #This is a heading pulse
             Xbee.write('h'.encode())
             #Write info
-            toWrite.append([current_time, 360, heading, 1, timer, 0])
-            #THERE ARE NO RESETS as the resets happen when timer reaches 360
+            toWrite.append([current_time, heading_phase, heading, 1, timer_phase, 0])
+            #Modulo operator will take care of the resseting phase
             pinged = True #So that PCO does not continiously ping
 
 
         #Check if timer has reached the end of period
-        if timer >= 360:
+        if timer_phase >= 360:
             #Send timer pulse to other nodes (t)
             Xbee.write('t'.encode())
             #Store both the top and bottom of a ping for better graphs
-            toWrite.append([current_time, phase, heading, 0, timer, 1])
-            toWrite.append([current_time, 0, heading, 0, timer, 0])
-            #Then reset the timer and phase
-            phase = heading
+            toWrite.append([current_time, heading_phase, heading, 0, 360, 1])
+            toWrite.append([current_time, heading, heading, 0, 0, 0])
+            #Then reset the timer and phases
+            timer_phase = 0
+            heading_phase = (timer_phase + heading) % 360
             start = current_time
             log_timer = start + LOG_PERIOD
+            offset = 0
             pinged = False #Reset so that the ossilation can ping again
             #In order to keep heading restricted, subtract 360 if heading > 360
             if heading > 360:
@@ -168,7 +171,7 @@ while PCO_start + DURATION > current_time:
                 #However, its exsistence is noted
 
                 #Record the current phase before changing for good graphs
-                toWrite.append([current_time, phase, heading, 0, timer, 0])
+                toWrite.append([current_time, heading_phase, heading, 0, timer_phase, 0])
 
                 #Check if message contains 't' -> adjust timer
                 #This will acount if have multiple signals of different types on the line
@@ -176,12 +179,12 @@ while PCO_start + DURATION > current_time:
                 if 't' in message:
                 #Have phase response adjust timer value, like heading not exsist
                     if timer <= 180:
-                        delta = STRENGTH * -timer
+                        delta = STRENGTH * -timer_phase
                     else:
-                        delta = STRENGTH * (360 - timer)
+                        delta = STRENGTH * (360 - timer_phase)
                     offset += delta
-                    timer += delta
-                    phase += delta
+                    timer_phase += delta
+                    heading_phase += delta
 
                 else:
                     #Just adjust the heading as you would normally
@@ -196,16 +199,16 @@ while PCO_start + DURATION > current_time:
                     else:
                         delta = STRENGTH * (360 - x)
                     heading += delta
-                    phase += delta
+                    heading_phase += delta
 
     #-----END PHASE RESPONSE ------
 
                 #Record the new phase
-                toWrite.append([current_time, phase, heading, 0, timer, 0])
+                toWrite.append([current_time, heading_phase, heading, 0, timer_phase, 0])
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, phase, heading, 0, timer, 0])
+            toWrite.append([current_time, heading_phase, timer_phase, 0, timer, 0])
             log_timer += LOG_PERIOD
 
 
