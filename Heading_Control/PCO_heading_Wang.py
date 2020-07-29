@@ -42,7 +42,6 @@ def sync_start(): #Used to sync the starting times of nodes
             if Xbee.inWaiting() > 0:
                 start = int(Xbee.read(Xbee.inWaiting()).decode())
                 print('Start in ' + str(start - int(time.time())))
-                Xbee.write(socket.gethostname().encode())
                 break
         while time.time() < start:
             pass
