@@ -166,7 +166,7 @@ while PCO_start + DURATION > current_time:
                 Type = Delay-Advance
                 Form = Wang Optimal Simple
                 '''
-                if phase > 360:
+                if phase <= 360:
                     #Adjusting Heading
                     x = phase % 360 #Used in this implenation to calculate shifts
                     if x <= 180:
