@@ -162,8 +162,12 @@ while PCO_start + DURATION > current_time:
                     delta = STRENGTH * -x
                 else:
                     delta = STRENGTH * (360 - x)
-                heading += delta 
-                phase += delta
+                heading += delta
+                #In order to keep heading restricted, subtract 360 if heading > 360
+                if heading > 360:
+                    heading -= 360
+                phase = (current_time - start) * CONVERSION_FACTOR + heading
+                #Just recalculate this as would at the top of loop
 
     #-----END PHASE RESPONSE ------
 
