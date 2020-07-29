@@ -160,7 +160,7 @@ for fm in filenames:
                 #Graph timer pulses
                 try:
                     if row[5] == str(1):
-                        plt.plot(float(row[0]), float(row[1]), marker='o', color='m')
+                        plt.plot(float(row[0]), float(row[4]), marker='o', color='m')
                 except:
                     pass
             plt.plot(x,y,colors[i])
