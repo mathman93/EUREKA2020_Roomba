@@ -180,7 +180,7 @@ while PCO_start + DURATION > current_time:
                     x = (360 + heading) - phase
                     #x will always be less than 180 b/c phase requirements?
                     delta = STRENGTH * -x
-                    timer += delta
+                    start += delta
                     
                 phase += delta
 
