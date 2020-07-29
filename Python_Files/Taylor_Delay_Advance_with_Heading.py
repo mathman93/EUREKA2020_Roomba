@@ -16,7 +16,6 @@ CycleTime = threshold/frequency
 ## Main Code ##
 time1 = time.time() - (time.time() % CycleTime)
 Timer = 0
-heading = 0
 nodephase = 0
 
 while True:
