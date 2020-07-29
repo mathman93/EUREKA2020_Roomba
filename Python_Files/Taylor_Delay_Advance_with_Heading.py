@@ -17,13 +17,14 @@ CycleTime = 30
 Time1 = 0
 OldTime = time.time() - (time.time() % CycleTime)
 heading = 0
+nodephase = 0
 
 while True:
 
     try:
         ## Increasing the phase value ##
         NewTime = time.time()
-        Time1 = NewTime - OldTiem
+        Time1 = NewTime - OldTime
         nodephase = heading + (Time1 * frequency)
 
         ## Reaching the Threshold and Sending Pulses ##
