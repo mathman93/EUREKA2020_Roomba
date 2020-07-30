@@ -112,9 +112,9 @@ toWrite.append([time.time(), heading_phase, heading, 0, timer_phase, 0])
 
 timer_start = time.time() #The start time of the current cycle (for the timer)
 heading_start = 0 #The start time for the heading cycle
-PCO_start = start #The time the ossilator began
-current_time = start #Used so that first interation of while loop works
-log_timer = start + LOG_PERIOD #The time of the next periodic log
+PCO_start = timer_start #The time the ossilator began
+current_time = timer_start #Used so that first interation of while loop works
+log_timer = timer_start + LOG_PERIOD #The time of the next periodic log
 pinged = False #Used to store if the ossilator is supposed to ping this ossilation
 offset = 0 #Bringing it back so that can have clock shifts
 #-------- Main Loop ---------
