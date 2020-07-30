@@ -131,6 +131,7 @@ MASTER = PCO.start_sim()
 #Level 1 - Different methods
 for info in method_dicts:
     print('Starting ' + info['direct'] + ' tests')
+    i = 0 #Counter that gives each file a unique number
     #Level 2 - Start_phase
     for start_phase in start_phase_tests:
         #Level 3 - Refract
@@ -139,9 +140,10 @@ for info in method_dicts:
             for might in info['parameters'][0]:
                 #Level 5 - Second unique parameter
                 for constant in info['parameters'][1]:
-                    head, f = info['function'](info['prefix'], info['path'], MASTER, start_phase, refract, might, constant)
+                    head, f = info['function'](info['prefix']+str(i), info['path'], MASTER, start_phase, refract, might, constant)
                     head.insert(0, os.path.basename(f.name)) #Add filename to the list of info for the file
                     info['key'].write(str(head) + '\n') #Write info to file
+                    i += 1 #Increment the counter
 
 #Clean-up
 #Close down all the key files AND Xbee
