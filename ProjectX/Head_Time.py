@@ -13,11 +13,13 @@ from random import uniform
 
 #CONSTANTS
 LOG_PERIOD = .01 #Time between when to log data
-PERIOD = 4 #Time in seconds for each Ossilation
+PERIOD = 4 #Time in seconds for non-pause Ossilation
+PAUSE_PERIOD = 5 #Time length for the pause period
 HALF_PERIOD = PERIOD/2
 STRENGTH = .7 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 CONVERSION_FACTOR = (360.0 / PERIOD) #Multiply by the time in order to find degs FOR TIMER
+CONVERSION_FACTOR_PAUSE = (360.0 / PAUSE_PERIOD) #Multiply by the time in order to find degs FOR TIMER DURING PAUSE
 CONVERSION_FACTOR_HALF = (360.0 / HALF_PERIOD) #Multiply by the time in order to find degs FOR HEADING
 #eg value => phase OR seconds => degrees
 
@@ -115,7 +117,7 @@ heading_start = 0 #The start time for the heading cycle
 PCO_start = timer_start #The time the ossilator began
 current_time = timer_start #Used so that first interation of while loop works
 log_timer = timer_start + LOG_PERIOD #The time of the next periodic log
-pinged = False #Used to store if the ossilator is supposed to ping this ossilation
+isPause = False #Used to store if the ossilator is during a pause cycle
 heading_pinged = False #Used to store if the heading value caused a ping
 offset = 0 #Bringing it back so that can have clock shifts
 #-------- Main Loop ---------
@@ -123,7 +125,11 @@ while PCO_start + DURATION > current_time:
     try:
         #Update timer
         current_time = time.time()
-        timer_phase = (current_time - timer_start) * CONVERSION_FACTOR + offset
+        #Top is special case to make pause phase longer
+        if isPause:
+            timer_phase = (current_time - timer_start) * CONVERSION_FACTOR_PAUSE + offset
+        else:
+            timer_phase = (current_time - timer_start) * CONVERSION_FACTOR + offset
         #Set heading phase
         if isheading_phase:
             heading_phase = ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) % 360
@@ -153,7 +159,7 @@ while PCO_start + DURATION > current_time:
         #Check if timer has reached the end of period
         if timer_phase >= 360:
             #Send timer pulse to other nodes (t) IF IT IS THE CORRECT CYCLE
-            if pinged:
+            if isPause:
                 Xbee.write('t'.encode())
             #Store both the top and bottom of a ping for better graphs
                 toWrite.append([current_time, heading_phase, heading, 0, 360, 1])
@@ -166,11 +172,11 @@ while PCO_start + DURATION > current_time:
             log_timer = timer_start + LOG_PERIOD
             offset = 0
             #Flip its value so that next cycle is oposite (eg if pinged, don't)
-            pinged = not pinged
+            isPause = not isPause
 
         #Check if time to activate the heading_phase
         #This time is half way through the not pinging cycle
-        if not pinged and current_time - timer_start >= HALF_PERIOD and not isheading_phase:
+        if not isPause and current_time - timer_start >= HALF_PERIOD and not isheading_phase:
             #Kick on the heading stuff
             isheading_phase = True
             heading_phase = heading
@@ -213,7 +219,7 @@ while PCO_start + DURATION > current_time:
                 heading_phase += delta
 
             #2nd - Pause period
-            elif pinged:
+            elif isPause:
                 #Clock Phase Adjust
                 '''
                 Type = Delay-Advance
