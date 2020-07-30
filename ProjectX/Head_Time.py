@@ -123,7 +123,7 @@ while PCO_start + DURATION > current_time:
     try:
         #Update timer
         current_time = time.time()
-        timer_phase = (current_time - timer_start) * CONVERSION_FACTOR_HALF + offset
+        timer_phase = (current_time - timer_start) * CONVERSION_FACTOR + offset
         #Set heading phase
         if isheading_phase:
             heading_phase = ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) % 360

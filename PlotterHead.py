@@ -147,13 +147,15 @@ for fm in filenames:
         with open(fm, newline='') as f:
             reader = csv.reader(f, delimiter=',')
             x = []
+            xh = []
+            yh = []
             y = []
             for row in reader:
                 try:
                     xh.append(float(row[0]))
                     yh.append(float(row[1]))
                     x.append(float(row[0]))
-                    y.append(float(row[3]))
+                    y.append(float(row[4]))
                 except:
                     print('Help')
                 #Graph phase value
