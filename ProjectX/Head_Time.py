@@ -104,7 +104,9 @@ if ss: sync_start() #Try to set global time for all the nodes to start at
 #Then clock pings and everything starts
 wait_start = time.time()
 current_time = wait_start
-while wait_start + PAUSE_PERIOD > current_time:
+#Calculate wait time to be more than PERIOD, but slightly less than PAUSE_PERIOD
+wait = PAUSE_PERIOD - 0.1 #Here, I just remove a little time from PP
+while wait_start + wait > current_time:
     current_time = time.time()
     #Check if recive a signal, if does, then reset timer
     inWait = Xbee.inWaiting()
