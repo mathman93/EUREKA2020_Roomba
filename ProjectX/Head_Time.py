@@ -133,7 +133,7 @@ while PCO_start + DURATION > current_time:
         
         #Check if need heading pulse based on if the heading phase
         #NOTE - this long calculation == heading_phase w/o the modulo operation
-        if ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) >= 360 and not heading_pinged:
+        if ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) >= 360 and not heading_pinged and isheading_phase:
             #This is a heading pulse
             Xbee.write('h'.encode())
             #Write info
