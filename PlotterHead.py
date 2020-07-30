@@ -150,8 +150,10 @@ for fm in filenames:
             y = []
             for row in reader:
                 try:
+                    xh.append(float(row[0]))
+                    yh.append(float(row[1]))
                     x.append(float(row[0]))
-                    y.append(float(row[1]))
+                    y.append(float(row[3]))
                 except:
                     print('Help')
                 #Graph phase value
@@ -164,6 +166,7 @@ for fm in filenames:
                 except:
                     pass
             plt.plot(x,y,colors[i])
+            plt.plot(xh,yh,colors[i+3])
             i += 1
 
 plt.show()
