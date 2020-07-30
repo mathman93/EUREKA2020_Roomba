@@ -156,7 +156,9 @@ while PCO_start + DURATION > current_time:
             if pinged:
                 Xbee.write('t'.encode())
             #Store both the top and bottom of a ping for better graphs
-            toWrite.append([current_time, heading_phase, heading, 0, 360, 1])
+                toWrite.append([current_time, heading_phase, heading, 0, 360, 1])
+            else:
+                toWrite.append([current_time, heading_phase, heading, 0, 360, 0])
             toWrite.append([current_time, heading_phase, heading, 0, 0, 0])
             #Then reset the timer and other things 
             timer_phase = 0
@@ -172,7 +174,7 @@ while PCO_start + DURATION > current_time:
             #Kick on the heading stuff
             isheading_phase = True
             heading_phase = heading
-            heading_start = current_time
+            heading_start = current_time + heading * (1/CONVERSION_FACTOR_HALF)
             
     #--------------Phase Shift Stuff--------------
 
