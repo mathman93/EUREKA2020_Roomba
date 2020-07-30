@@ -237,7 +237,11 @@ while PCO_start + DURATION > current_time:
                 else:
                     delta = STRENGTH * (360 - heading_phase)
                 heading += delta
-                heading_phase += delta
+                #To keep heading in range 0-360
+                if heading > 360: heading -= 360
+                if heading < 0: heading += 360
+                #Recalc_heading_phase 
+                heading_phase = ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) % 360
 
             #2nd - Pause period BUT NOT the first HALF_PERIOD
             elif isPause and current_time - timer_start > HALF_PERIOD:
