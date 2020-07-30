@@ -116,6 +116,7 @@ PCO_start = timer_start #The time the ossilator began
 current_time = timer_start #Used so that first interation of while loop works
 log_timer = timer_start + LOG_PERIOD #The time of the next periodic log
 pinged = False #Used to store if the ossilator is supposed to ping this ossilation
+heading_pinged = False #Used to store if the heading value caused a ping
 offset = 0 #Bringing it back so that can have clock shifts
 #-------- Main Loop ---------
 while PCO_start + DURATION > current_time:
@@ -132,18 +133,20 @@ while PCO_start + DURATION > current_time:
         
         #Check if need heading pulse based on if the heading phase
         #NOTE - this long calculation == heading_phase w/o the modulo operation
-        if ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) >= 360:
+        if ((current_time - heading_start) * CONVERSION_FACTOR_HALF + heading) >= 360 and not heading_pinged:
             #This is a heading pulse
             Xbee.write('h'.encode())
             #Write info
             toWrite.append([current_time, 360, heading, 1, timer_phase, 0])
             toWrite.append([current_time, 0, heading, 0, timer_phase, 0])
+            heading_pinged = True
 
         #Check if need to stop the heading_phase from running
         if current_time - heading_start >= HALF_PERIOD:
             #Reset heading phase for the next time it is need and set isheading_phase to zero
             heading_phase = 0
             isheading_phase = False
+            heading_pinged = False
 
     #--------------Timer Stuff--------------
 
