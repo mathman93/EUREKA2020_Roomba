@@ -98,6 +98,21 @@ csvWriter.writerow(['Timestamp', 'HeadingPhase', 'Heading', 'HeadPing?', 'TimerP
 if ss: sync_start() #Try to set global time for all the nodes to start at
 #----- END OF INIT -------
 
+#---------------------Joining The Ossilation----------------------------
+#This is the most important part of making this method work properly
+#Basicly, wait until the air is open for PAUSE_PERIOD
+#Then clock pings and everything starts
+wait_start = time.time()
+current_time = wait_start
+while wait_start + PAUSE_PERIOD > current_time:
+    #Check if recive a signal, if does, then reset timer
+    inWait = Xbee.inWaiting()
+    if inWait > 0:
+        Xbee.read(inWait)
+        wait_start = current_time
+
+print('Joined')
+
 
 #------- BEGINNING PROCEDURES --------
 #Variables that will be used during the MAIN LOOP
@@ -106,20 +121,21 @@ toWrite = [] #2D list that is temp storage for logs
 heading = head #Used to store the 'heading' of an node -> only works with sync_start
 timer_phase = 0
 heading_phase = 0 #Header phase does not always exsits, only during small time between clock wait and pause
+offset = 0 #Bringing it back so that can have clock shifts
+heading_start = 0 #The start time for the heading cycle
 isheading_phase = False #True is the headering_phase is being updated / used
-#Write intial conditions of osilator to file
-toWrite.append([time.time(), heading_phase, heading, 0, timer_phase, 0])
+isPause = False #Used to store if the ossilator is during a pause cycle
+heading_pinged = False #Used to store if the heading value caused a ping
 
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
+#Write intial conditions of osilator to file
+toWrite.append([time.time(), heading_phase, heading, 0, timer_phase, 0])
+
 timer_start = time.time() #The start time of the current cycle (for the timer)
-heading_start = 0 #The start time for the heading cycle
 PCO_start = timer_start #The time the ossilator began
 current_time = timer_start #Used so that first interation of while loop works
 log_timer = timer_start + LOG_PERIOD #The time of the next periodic log
-isPause = False #Used to store if the ossilator is during a pause cycle
-heading_pinged = False #Used to store if the heading value caused a ping
-offset = 0 #Bringing it back so that can have clock shifts
 #-------- Main Loop ---------
 while PCO_start + DURATION > current_time:
     try:
