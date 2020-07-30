@@ -142,7 +142,7 @@ while PCO_start + DURATION > current_time:
             heading_pinged = True
 
         #Check if need to stop the heading_phase from running
-        if current_time - heading_start >= HALF_PERIOD:
+        if current_time - timer_start >= PERIOD:
             #Reset heading phase for the next time it is need and set isheading_phase to zero
             heading_phase = 0
             isheading_phase = False
@@ -174,7 +174,7 @@ while PCO_start + DURATION > current_time:
             #Kick on the heading stuff
             isheading_phase = True
             heading_phase = heading
-            heading_start = current_time + heading * (1/CONVERSION_FACTOR_HALF)
+            heading_start = current_time
             
     #--------------Phase Shift Stuff--------------
 
