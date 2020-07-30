@@ -204,9 +204,11 @@ while PCO_start + DURATION > current_time:
     #--------------Phase Shift Stuff--------------
 
         #This is where it gets confusing, so lets break it down
-        #3 - If during heading phase, then listen for heading signals and shift
-        #1 - If during pause phase, then listen for clock signals and shift
-        #2 - If during 'clock' phase, then don't do anything
+        #1 - If during heading phase, then listen for heading signals and shift
+        #2 - If during pause phase, then listen for clock signals and shift
+        #HOWEVER, if during first HALF_PERIOD of pause, then don't listen b/c
+        #could be (and probably is) an heading pulse
+        #3 - If during 'clock' phase, then don't do anything
             #b/c this could be a clock OR heading signal
         
         #Check for signals on the line
@@ -237,8 +239,8 @@ while PCO_start + DURATION > current_time:
                 heading += delta
                 heading_phase += delta
 
-            #2nd - Pause period
-            elif isPause:
+            #2nd - Pause period BUT NOT the first HALF_PERIOD
+            elif isPause and current_time - timer_start > HALF_PERIOD:
                 #Clock Phase Adjust
                 '''
                 Type = Delay-Advance
