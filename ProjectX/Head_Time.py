@@ -170,7 +170,7 @@ while PCO_start + DURATION > current_time:
 
         #Check if time to activate the heading_phase
         #This time is half way through the not pinging cycle
-        if not pinged and current_time - timer_start >= HALF_PERIOD:
+        if not pinged and current_time - timer_start >= HALF_PERIOD and not isheading_phase:
             #Kick on the heading stuff
             isheading_phase = True
             heading_phase = heading
