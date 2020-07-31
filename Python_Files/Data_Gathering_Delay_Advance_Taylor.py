@@ -32,7 +32,7 @@ nodephase = 0
 ToWrite = []
 start = time.time()
 CurrentTime = start
-WriteTimer = CurrentTime() + RecordTime
+WriteTimer = CurrentTime + RecordTime
 
 while True:
 
