@@ -41,7 +41,8 @@ while True:
 				phase += (threshold - phase)
 			timer = timeDifference
 			phase = heading + (timer * frequency)
-			print("Heading is: " phase)
+			print("The heading is")
+			print(phase)
 
 	except KeyboardInterrupt:
 		print("Process Interrupted")
