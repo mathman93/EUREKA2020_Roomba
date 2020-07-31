@@ -27,8 +27,10 @@ csvWriter.writerow(['Time Stamp', 'Phase Value', 'Heading', 'Ping?'])
 
 ## Main Code ##
 time1 = time.time() - (time.time() % CycleTime) # Time reference
-Timer = 0
-nodephase = 0
+Timer = time.time() - time1
+nodephase = heading + (Timer * frequencey)
+if nodephase >= threshold:
+    time1 += CycleTime
 
 ToWrite = []
 start = time.time()
@@ -67,13 +69,13 @@ while True:
                 heading -= nodephase * CouplingStrength
             if 180 < nodephase <= threshold: # Adjusting nodephase based on heading
                 heading += (threshold - nodephase) * CouplingStrength
-            if heading >= 360:
-                heading -= 360
-                time1 += CycleTime
+            if heading >= threshold:
+                heading -= threshold
+                time1 -= CycleTime
                 print("The heading is: %f" % heading)
             if heading <= 0:
-                heading += 360
-                time1 -= CycleTime
+                heading += threshold
+                time1 += CycleTime
                 print("The heading is: %f" % heading)
             ToWrite.append([time.time(), nodephase, heading, 0])
             print("The phase value is: %f" % nodephase)
