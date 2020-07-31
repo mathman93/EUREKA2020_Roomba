@@ -18,9 +18,9 @@ frequency = 12 # Degrees/second
 CycleTime = threshold/frequency # Amount of time it takes nodephase to get form 0 to 360 degrees
 
 ## Data Collection Stuff ##
-FullName = socket.gethostname() + '_' + FileName + '.csv'
-path = os.path.join('..', 'Data_Files', FileName)
-file = open(path, 'w', newlinw='')
+FullName = FileName + '.csv'
+path = os.path.join('..', 'Data_Files', FullName)
+file = open(path, 'w', newline='')
 csvWriter = csv.writer(file)
 csvWriter.writerow(['Time Stamp', 'Phase Value', 'Heading', 'Ping?'])
 
