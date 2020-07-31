@@ -75,6 +75,7 @@ while True:
 	try:
 	
 		previousTime = copy(currentTime)
+		previousTime1 = time.time() - (time.time() % cycleLength)
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
 		timer = currentTime - previousTime1
@@ -96,7 +97,6 @@ while True:
 			if 180 < phase <= threshold:
 				phase += (threshold - phase)
 		cycleLength = threshold / frequency
-		previousTime1 = time.time() - (time.time() % cycleLength)
 
 		if phase > threshold:
 			timer = cycleLength
