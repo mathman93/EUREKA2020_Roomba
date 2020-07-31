@@ -36,13 +36,15 @@ start_phase_tests = eval(open(phase_path).read())
 strength_tests = [0.7]
 #perskin, M+S, Reachback
 ##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
-##epsilon_tests = [0.1] #Testing the b value
-epsilon_tests = [0.005, 0.002, 0.001] #SPECICAL frb version
+epsilon_tests = [0.3] #Testing the b value
+#epsilon_tests = [0.005, 0.002, 0.001] #SPECICAL frb version
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
-gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
+#gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
+gamma_tests = [8]
 #M+S
-b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
+#b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
+b_tests = [8]
 #b_tests = [5] #Just testing epsilon
 
 

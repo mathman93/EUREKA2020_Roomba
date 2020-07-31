@@ -313,7 +313,10 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
                 old_v = value #Used to calc offset
                 #Scale value to range 0-1 for calculations and then scale back at end
                 f = C*math.expm1(-GAMMA*(value / PERIOD))
-                value = (1/GAMMA)*math.log(C/(C+(f+EPSILON))) * PERIOD #Make sure to rescale to period
+                try:
+                    value = (1/GAMMA)*math.log(C/(C+(f+EPSILON))) * PERIOD #Make sure to rescale to period
+                except:
+                    pass
                 if value > PERIOD: value = PERIOD
                 offset += value - old_v
 
