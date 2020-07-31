@@ -67,13 +67,13 @@ while True:
                 heading -= nodephase * CouplingStrength
             if 180 < nodephase <= threshold: # Adjusting nodephase based on heading
                 heading += (threshold - nodephase) * CouplingStrength
-            if heading >= 360:
-                heading -= 360
-                time1 += CycleTime
+            if heading >= threshold:
+                heading -= threshold
+                time1 -= CycleTime
                 print("The heading is: %f" % heading)
             if heading <= 0:
-                heading += 360
-                time1 -= CycleTime
+                heading += threshold
+                time1 += CycleTime
                 print("The heading is: %f" % heading)
             ToWrite.append([time.time(), nodephase, heading, 0])
             print("The phase value is: %f" % nodephase)
