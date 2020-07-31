@@ -75,6 +75,7 @@ while True:
 	try:
 	
 		previousTime = copy(currentTime)
+		cycleLength = threshold / frequency
 		previousTime1 = time.time() - (time.time() % cycleLength)
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
@@ -88,7 +89,6 @@ while True:
 			Xbee.write(message.encode())
 			print("Pulse")
 
-
 		if Xbee.inWaiting() > 0:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
@@ -96,7 +96,6 @@ while True:
 				phase -= phase
 			if 180 < phase <= threshold:
 				phase += (threshold - phase)
-		cycleLength = threshold / frequency
 
 		if phase > threshold:
 			timer = cycleLength
