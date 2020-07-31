@@ -24,7 +24,7 @@ while True:
 		previousTime = copy(currentTime)
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
-		phase += timeDifference
+		phase += timeDifference * 60
 
 		if phase >= threshold:
 			phase = 0
