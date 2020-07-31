@@ -64,25 +64,22 @@ while True:
             print(message) # To see what the message is
             if 0 < nodephase <= 180: # Adjusting nodephase based on heading
                 heading -= nodephase/20
-                ToWrite.append([time.time(), nodephase, heading, 0])
             if 180 < nodephase <= threshold: # Adjusting nodephase based on heading
                 heading += (threshold - nodephase)/20
-                ToWrite.append([time.time(), nodephase, heading, 0])
             if heading >= 360:
                 heading -= 360
                 time1 += CycleTime
-                ToWrite.append([time.time(), nodephase, heading, 0])
                 print("The heading is: %f" % heading)
             if heading <= 0:
                 heading += 360
                 time1 -= CycleTime
-                ToWrite.append([time.time(), nodephase, heading, 0])
                 print("The heading is: %f" % heading)
+            ToWrite.append([time.time(), nodephase, heading, 0])
             print("The phase value is: %f" % nodephase)
 
         ## Recording Data ##
         if CurrentTime >= WriteTimer:
-            toWite.append([time.time(), nodephase, heading, 0])
+            ToWrite.append([time.time(), nodephase, heading, 0])
             WriteTimer  += RecordTime
 
     ## Keyboard Interupt ##
@@ -95,6 +92,8 @@ while True:
         print("Please enter a number.")
 
 ## Ending Code ##
+csvWriter.writerows(ToWrite)
+file.close()
 Xbee.close()
 
 
