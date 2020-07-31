@@ -117,7 +117,7 @@ def sync_start(master):
                         message = str(Xbee.read(Xbee.inWaiting()).decode())
                         print(message + ' added')
                         nc += 1
-                    return start #All good to go and start
+                return start #All good to go and start
             
             else: #Other nodes, which are waiting for start time
                 print('Waiting for master')
