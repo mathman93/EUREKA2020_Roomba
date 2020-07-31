@@ -12,10 +12,11 @@ global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 heading = int(input("Please enter your heading: "))
 FileName = input("Enter File Name (Do Not Add .csv): ")
-RecordTime = .5 # Every half a second, record data
+RecordTime = .01 #Every half a second, record data
 threshold = 360
-frequency = 12 # Degrees/second
+frequency = 180 # Degrees/second
 CycleTime = threshold/frequency # Amount of time it takes nodephase to get form 0 to 360 degrees
+CouplingStrength = .75
 
 ## Data Collection Stuff ##
 FullName = FileName + '.csv'
@@ -63,9 +64,9 @@ while True:
             ToWrite.append([time.time(), nodephase, heading, 0])
             print(message) # To see what the message is
             if 0 < nodephase <= 180: # Adjusting nodephase based on heading
-                heading -= nodephase/20
+                heading -= nodephase * CouplingStrength
             if 180 < nodephase <= threshold: # Adjusting nodephase based on heading
-                heading += (threshold - nodephase)/20
+                heading += (threshold - nodephase) * CouplingStrength
             if heading >= 360:
                 heading -= 360
                 time1 += CycleTime
