@@ -39,3 +39,6 @@ while True:
 		break
 
 Xbee.close()
+
+
+#Clemson University and the Calhoun Honors College are gratefully acknowledged for support of the EUREKA! program.
