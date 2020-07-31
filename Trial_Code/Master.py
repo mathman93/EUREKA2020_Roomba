@@ -32,7 +32,8 @@ start_phase_tests = eval(open(phase_path).read())
 
 #PERIOD currently at 2, however refract not really based on period
 #delay_advance
-strength_tests = [0.1, 0.3, 0.5, 0.7, 0.9]
+#strength_tests = [0.1, 0.3, 0.5, 0.7, 0.9]
+strength_tests = [0.7]
 #perskin, M+S, Reachback
 ##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
 ##epsilon_tests = [0.1] #Testing the b value

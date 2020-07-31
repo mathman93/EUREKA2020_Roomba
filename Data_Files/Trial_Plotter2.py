@@ -113,13 +113,13 @@ def graph_offset(filepaths):
 
 plt.ioff()
 #Give file path for all the datas that want to plot
-rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_905')
-rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_905')
-rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_905')
+rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_750')
+rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_750')
+rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_750')
 
-os.system('scp -r pi@192.168.1.14:' + rp1_path + 'Data_Files/raspberrypi1')
-os.system('scp -r pi@192.168.1.15:' + rp2_path + 'Data_Files/raspberrypi2')
-os.system('scp -r pi@192.168.1.17:' + rp3_path + 'Data_Files/raspberrypi3')
+os.system('scp -r pi@192.168.1.14:' + rp1_path + ' raspberrypi1')
+os.system('scp -r pi@192.168.1.15:' + rp2_path + ' raspberrypi2')
+os.system('scp -r pi@192.168.1.17:' + rp3_path + ' raspberrypi3')
 
 for directory in os.listdir(rp1_path):
     #Manually drill down into each directory and create seperate lists IN ORDER of the data
