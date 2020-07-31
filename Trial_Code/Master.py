@@ -36,12 +36,13 @@ start_phase_tests = eval(open(phase_path).read())
 strength_tests = [0.7]
 #perskin, M+S, Reachback
 ##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
-epsilon_tests = [0.3] #Testing the b value
+epsilon_tests = [0.05]
 #epsilon_tests = [0.005, 0.002, 0.001] #SPECICAL frb version
+epsilon_tests_frb = [0.005]
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
 #gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
-gamma_tests = [1]
+gamma_tests = [3]
 #M+S
 #b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
 b_tests = [5]
@@ -80,12 +81,13 @@ MS_info = {'prefix':'ms',
            }
 Reachback_info = {'prefix':'frb',
                   'direct':'FireflyReachback',
-                  'parameters':[epsilon_tests, [False]],
+                  'parameters':[epsilon_tests_frb, [False]],
                   'function': PCO.Reachback_Firefly
                   }
 
-method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
+##method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
 ##method_dicts = [delay_advance_info] #Only run DA for first tests
+method_dicts = [perskin_info, Reachback_info]
 #If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------
