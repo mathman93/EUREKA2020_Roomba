@@ -44,7 +44,7 @@ while True:
 				heading -= phase
 			if 180 < phase <= threshold:
 				heading += (threshold - phase)
-				if heading >= 360:
+			if heading >= 360:
 				heading -= 360
 				time1 += cycleLength
 				print("The heading is: %f" % heading)
