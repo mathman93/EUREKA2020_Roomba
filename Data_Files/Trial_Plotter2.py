@@ -46,9 +46,9 @@ def graph_difference(filepaths):
     #Theory, all recorded times should line up b/c sync start -> do not include non-periodic stuff
     #Now pull all the data from the files and sort out the non-periodic measurement stuff
     all_data = [] #3d list with all the data times and phases
-    for files in filepaths:
+    for file in filepaths:
         current_data = []
-        with open(fm, newline='') as f:
+        with open(file, newline='') as f:
             reader = csv.reader(f, delimiter=',')
             #Read through all the peridoic measurement lines and record the time / phase
             for row in reader:
@@ -62,23 +62,23 @@ def graph_difference(filepaths):
     #Calculate the smallest arc for each recorded time
     arc_lengths = [] #Arc_length
     times = [] #Times
-    for index in range(len(all_data[0])):
+    for index in range(len(all_data[0])-5): # -5 to prevent weird stuff
         #Put the data for the same time in a list, which then used to calc stuff
         current_info = []
         for data in all_data:
             current_info.append(data[index]) #Add tuples that SHOULD have same time to the current_info
-        times.append(current_info[0][0])
+        times.append(float(current_info[0][0]))
         current_phases = []
         for i in range(len(current_info)):
-            current_phases.append(current_info[i][1])
+            current_phases.append(float(current_info[i][1]))
         #Finally calculate all the constants and figue out the smallest
         #NOTE - this assumes three nodes
         current_phases.sort() #So that max is 2, min is 0, and middle is 1
-        A = current_phases[2] - 360
-        B = current_phases[0]
-        C = current_phases[2] - current_phases[1]
-        D = current_phases[1] - current_phases[0]
-        arc_length.append(min([D+C, A+B+C, A+B+D]))
+        A = abs(360 - current_phases[2])
+        B = float(current_phases[0])
+        C = abs(current_phases[2] - current_phases[1])
+        D = abs(current_phases[1] - current_phases[0])
+        arc_lengths.append(min([D+C, A+B+C, A+B+D]))
 
     #Now, we can graph 
     plt.plot(times,arc_lengths,'r')
@@ -101,8 +101,6 @@ def graph_offset(filepaths):
                     y.append(float(row[2]))
                 except:
                     pass
-                if row[3] == str(1):
-                    plt.plot(float(row[0]), float(row[1]), marker='o')
             plt.plot(x,y,colors[i])
             i += 1
 
@@ -113,9 +111,9 @@ def graph_offset(filepaths):
 
 plt.ioff()
 #Give file path for all the datas that want to plot
-rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_750')
-rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_750')
-rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_750')
+rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_820')
+rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_820')
+rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_820')
 
 os.system('scp -r pi@192.168.1.14:' + rp1_path + ' raspberrypi1')
 os.system('scp -r pi@192.168.1.15:' + rp2_path + ' raspberrypi2')
@@ -153,6 +151,7 @@ for directory in os.listdir(rp1_path):
 
     #Loop through all the files
     for j in range(len(rp1_Files)):
+        print('Next file')
         filenames = [rp1_Paths[j], rp2_Paths[j], rp3_Paths[j]]
         graph_phase(filenames)
         graph_difference(filenames)

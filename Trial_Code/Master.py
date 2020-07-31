@@ -82,8 +82,8 @@ Reachback_info = {'prefix':'frb',
                   'function': PCO.Reachback_Firefly
                   }
 
-##method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
-method_dicts = [delay_advance_info] #Only run DA for first tests
+method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
+##method_dicts = [delay_advance_info] #Only run DA for first tests
 #If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------

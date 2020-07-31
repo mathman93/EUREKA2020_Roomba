@@ -265,13 +265,13 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
     value = 0 #The value of the ossilator, which used to find phase
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), start_phase, 0, 0])
+    toWrite.append([loop_start, start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
     current_time = time.time()
-    log_timer = start + LOG_PERIOD #The time of the next periodic log
+    log_timer = loop_start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
         #Update value
@@ -324,7 +324,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, (value / PERIOD) * 360, offset, 0])
+            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0])
             log_timer += LOG_PERIOD
     #-------- Main Loop End ---------
 
@@ -372,13 +372,13 @@ def M_and_S(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, B): #
     value = 0 #The value of the ossilator, which used to find phase
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), start_phase, 0, 0])
+    toWrite.append([loop_start, start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
     current_time = time.time()
-    log_timer = start + LOG_PERIOD #The time of the next periodic log
+    log_timer = loop_start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
         #Update value
@@ -431,7 +431,7 @@ def M_and_S(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, B): #
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, (value / PERIOD) * 360, offset, 0])
+            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0])
             log_timer += LOG_PERIOD
     #-------- Main Loop End ---------
 
@@ -490,13 +490,13 @@ def Reachback_Firefly(file_prefix, file_path, master, start_phase, REFRACT, EPSI
     offset = (start_phase/360) * PERIOD #The increase to value caused by phase shifts (or inital conditions)
     next_offset = 0 #Stores the offset value for the next cycle
     #Write intial conditions of osilator to file
-    toWrite.append([time.time(), start_phase, 0, 0])
+    toWrite.append([loop_start, start_phase, 0, 0])
 
     #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
     start = time.time() #The start time of the current cycle
     current_time = time.time()
-    log_timer = start + LOG_PERIOD #The time of the next periodic log
+    log_timer = loop_start + LOG_PERIOD #The time of the next periodic log
     #-------- Main Loop ---------
     while current_time < loop_start + SIM_LENGTH: #Keep running untill run about 30 seconds
         #Update value
@@ -552,7 +552,7 @@ def Reachback_Firefly(file_prefix, file_path, master, start_phase, REFRACT, EPSI
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([current_time, (value / PERIOD) * 360, offset, 0])
+            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0])
             log_timer += LOG_PERIOD
     #-------- Main Loop End ---------
 
