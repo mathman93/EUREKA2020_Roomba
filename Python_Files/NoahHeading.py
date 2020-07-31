@@ -44,15 +44,15 @@ while True:
 				heading -= phase
 			if 180 < phase <= threshold:
 				heading += (threshold - phase)
-			if heading >= 360:
-                heading -= 360
-                time1 += cycleLength
-                print("The heading is: %f" % heading)
-            if heading <= 0:
-                heading += 360
-                time1 -= cycleLength
-                print("Heading: %f" % heading)
-            print("Phase: %f" % phase)
+				if heading >= 360:
+				heading -= 360
+				time1 += cycleLength
+				print("The heading is: %f" % heading)
+			if heading <= 0:
+				heading += 360
+				time1 -= cycleLength
+				print("Heading: %f" % heading)
+			print("Phase: %f" % phase)
 
 	except KeyboardInterrupt:
 		print("Process Interrupted")
