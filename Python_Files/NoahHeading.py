@@ -10,7 +10,11 @@ phase = random.randint(0,360)
 threshold = 360
 previousTime = time.time()
 currentTime = time.time()
-desiredHeading = int(input("Enter desired heading (integers only)."))
+heading = int(input("Enter desired heading (integers only)."))
+cycleLength = 360
+frequency = 15
+
+time1 = time.time() - (time.time() % cycleLength)
 
 while True:
 
@@ -21,33 +25,34 @@ while True:
 		timeDifference = currentTime - previousTime
 		phase += timeDifference * 60
 
+		timer = time.time() - time1
+		phase = heading + (timer * frequency)
+
 		if phase >= threshold:
 			phase = 0
 			message = "Received"
 			Xbee.write(message.encode())
 			print("Pulse")
+			ptint ("Phase: %f" % phase)
+			time1 += cycleLength
 
 
 		if Xbee.inWaiting() > 0:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
 			if 0 <= phase <= 180:
-				phase -= phase
+				heading -= phase
 			if 180 < phase <= threshold:
-				phase += (threshold - phase)
-	except KeyboardInterrupt:
-		print("Process Interrupted")
-		break
-
-while True:
-	try:
-		timer = time.time()
-			if time.time - timer > 1.0:
-				print ("{0:.3f}").format(phase)
-				timer += 1.0
-
-		phase = heading + timer.freq
-
+				heading += (threshold - phase)
+			if heading >= 360:
+                heading -= 360
+                time1 += cycleLength
+                print("The heading is: %f" % heading)
+            if heading <= 0:
+                heading += 360
+                time1 -= cycleLength
+                print("Heading: %f" % heading)
+            print("Phase: %f" % phase)
 
 	except KeyboardInterrupt:
 		print("Process Interrupted")
