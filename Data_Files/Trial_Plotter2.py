@@ -60,7 +60,7 @@ def graph_difference(filepaths):
     #Calculate the smallest arc for each recorded time
     arc_lengths = [] #Arc_length
     times = [] #Times
-    for index in range(len(all_data[0])-10): # -5 to prevent weird stuff
+    for index in range(len(all_data[0])-15): # -5 to prevent weird stuff
         #Put the data for the same time in a list, which then used to calc stuff
         current_info = []
         for data in all_data:
@@ -109,9 +109,9 @@ def graph_offset(filepaths):
 
 plt.ioff()
 #Give file path for all the datas that want to plot
-rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_128')
-rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_128')
-rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_128')
+rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_158')
+rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_158')
+rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_158')
 
 os.system('scp -r pi@192.168.1.14:' + rp1_path + ' raspberrypi1')
 os.system('scp -r pi@192.168.1.15:' + rp2_path + ' raspberrypi2')

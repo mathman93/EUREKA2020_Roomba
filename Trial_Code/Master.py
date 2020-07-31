@@ -36,7 +36,8 @@ start_phase_tests = eval(open(phase_path).read())
 strength_tests = [0.7]
 #perskin, M+S, Reachback
 ##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
-epsilon_tests = [0.05]
+epsilon_tests_p = [0.05]
+epsilon_tests_ms = [0.3]
 #epsilon_tests = [0.005, 0.002, 0.001] #SPECICAL frb version
 epsilon_tests_frb = [0.01]
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
@@ -71,12 +72,12 @@ delay_advance_info = {'prefix':'da', #In file names that use this method
                       }
 perskin_info = {'prefix':'prskn',
                 'direct':'Perskin',
-                'parameters':[epsilon_tests, gamma_tests],
+                'parameters':[epsilon_tests_p, gamma_tests],
                 'function': PCO.peskin
                 }
 MS_info = {'prefix':'ms',
            'direct':'MirolloStrogatz',
-           'parameters':[epsilon_tests, b_tests],
+           'parameters':[epsilon_tests_ms, b_tests],
            'function': PCO.M_and_S
            }
 Reachback_info = {'prefix':'frb',
@@ -85,9 +86,9 @@ Reachback_info = {'prefix':'frb',
                   'function': PCO.Reachback_Firefly
                   }
 
-##method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
+method_dicts = [delay_advance_info, perskin_info, MS_info]
 ##method_dicts = [delay_advance_info] #Only run DA for first tests
-method_dicts = [Reachback_info]
+##method_dicts = [Reachback_info]
 #If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------
