@@ -23,7 +23,7 @@ import PCO
 #-------------------------------- Parameters --------------------------------
 #Global
 #refract_tests = [0, 0.01, 0.05, 0.1, 0.2] #IN SECONDS
-refract_tests = [0]
+refract_tests = [0.05]
 
 #TODO - Read starting phases from file
 #This file is a python list, located in the hostname folder with the name bellow
@@ -41,10 +41,10 @@ epsilon_tests = [0.3] #Testing the b value
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
 #gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
-gamma_tests = [8]
+gamma_tests = [5]
 #M+S
 #b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
-b_tests = [8]
+b_tests = [5]
 #b_tests = [5] #Just testing epsilon
 
 

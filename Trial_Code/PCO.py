@@ -38,6 +38,69 @@ def init_file(file_prefix, file_path, header):
     return csvWriter, file
 
 #Used to syncronize the start of the ossilators
+##def sync_start(master):
+##    #In while loop so can restart if there is a problem
+##    while True:
+##        try:
+##            if master:
+##                nc = 1 #Count of how many nodes have registered for communication
+##                print('Wait for other nodes to prepare')
+##                time.sleep(5) #Wait for five seconds to give other nodes time to prepare to rx signals
+##                print('Sending start time for 5 seconds')
+##                start = int(time.time()) + 5
+##                Xbee.write(str(start).encode())
+##                while time.time() < start-2: #Do check with 2 seconds left to see if all the nodes are ready
+##                    if Xbee.inWaiting() > 0:
+##                        message = str(Xbee.read(Xbee.inWaiting()).decode())
+##                        print(message + ' added')
+##                        nc += 1
+##                #NOTE - still 2 seconds till start
+##                if nc != NODE_COUNT: #Check if everyone is here
+##                    Xbee.write('q'.encode()) #Send a quit signal to the other nodes
+##                    print('Not all nodes registered -> Canceled start time')
+##                    print('resending new start time')
+##                else: #If not then just resume the waiting loop
+##                    while time.time() < start:
+##                        pass
+##                    return start #All good to go and start
+##            
+##            else: #Other nodes, which are waiting for start time
+##                print('Waiting for master')
+##                skip = False
+##                while True:
+##                    if Xbee.inWaiting() > 0:
+##                        x = Xbee.read(Xbee.inWaiting()).decode()
+##                        if x == 'q': #Handle the quit case
+##                            skip = True #Used to get out of the next while loop
+##                            print('Recieved a quit signal -> restarting sync')
+##                            break
+##                        try: #This try/except is to handle if receive a singal from another node
+##                            start = int(x)
+##                            print('Start in ' + str(start - int(time.time())))
+##                            Xbee.write(socket.gethostname().encode())
+##                            break
+##                        except:
+##                            pass
+##                if not skip: #Used to check if be got an error eariler and therefore should skip the next sync step
+##                    #Now wait for the start, while looking for a quit signal
+##                    while time.time() < start:
+##                        if Xbee.inWaiting() > 0:
+##                            x = Xbee.read(Xbee.inWaiting()).decode()
+##                            if x == 'q': #Handle the quit case
+##                                skip = True #Used to get out of the next while loop
+##                                print('Recieved a quit signal -> restarting sync')
+##                                break
+##                if not skip: #Final check
+##                    return start #All good to go and start
+##                skip = False
+##
+##        #In case of a user reset to the syncs sequence:
+##        except KeyboardInterrupt:
+##            print('Restarting sync')
+##            print('Restart other nodes first so that they are ready to hear from master')
+
+#Used to syncronize the start of the ossilators
+#New verison that does not have check sums b/c they mess with the network
 def sync_start(master):
     #In while loop so can restart if there is a problem
     while True:
@@ -49,19 +112,11 @@ def sync_start(master):
                 print('Sending start time for 5 seconds')
                 start = int(time.time()) + 5
                 Xbee.write(str(start).encode())
-                while time.time() < start-2: #Do check with 2 seconds left to see if all the nodes are ready
+                while time.time() < start:
                     if Xbee.inWaiting() > 0:
                         message = str(Xbee.read(Xbee.inWaiting()).decode())
                         print(message + ' added')
                         nc += 1
-                #NOTE - still 2 seconds till start
-                if nc != NODE_COUNT: #Check if everyone is here
-                    Xbee.write('q'.encode()) #Send a quit signal to the other nodes
-                    print('Not all nodes registered -> Canceled start time')
-                    print('resending new start time')
-                else: #If not then just resume the waiting loop
-                    while time.time() < start:
-                        pass
                     return start #All good to go and start
             
             else: #Other nodes, which are waiting for start time
@@ -70,14 +125,9 @@ def sync_start(master):
                 while True:
                     if Xbee.inWaiting() > 0:
                         x = Xbee.read(Xbee.inWaiting()).decode()
-                        if x == 'q': #Handle the quit case
-                            skip = True #Used to get out of the next while loop
-                            print('Recieved a quit signal -> restarting sync')
-                            break
                         try: #This try/except is to handle if receive a singal from another node
                             start = int(x)
                             print('Start in ' + str(start - int(time.time())))
-                            Xbee.write(socket.gethostname().encode())
                             break
                         except:
                             pass
@@ -86,10 +136,6 @@ def sync_start(master):
                     while time.time() < start:
                         if Xbee.inWaiting() > 0:
                             x = Xbee.read(Xbee.inWaiting()).decode()
-                            if x == 'q': #Handle the quit case
-                                skip = True #Used to get out of the next while loop
-                                print('Recieved a quit signal -> restarting sync')
-                                break
                 if not skip: #Final check
                     return start #All good to go and start
                 skip = False
@@ -99,6 +145,7 @@ def sync_start(master):
             print('Restarting sync')
             print('Restart other nodes first so that they are ready to hear from master')
 
+            
 def start_sim():#Makes sure that all nodes are online before beginning simulations
     #Also, sets up which node is the master, then calls sync_start
     #AS ALWAYS, CALL THE MASTER LAST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -316,7 +363,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
                 try:
                     value = (1/GAMMA)*math.log(C/(C+(f+EPSILON))) * PERIOD #Make sure to rescale to period
                 except:
-                    pass
+                    print(file_prefix, current_time, phase)
                 if value > PERIOD: value = PERIOD
                 offset += value - old_v
 
