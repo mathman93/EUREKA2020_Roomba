@@ -33,7 +33,7 @@ while True:
 			message = "Received"
 			Xbee.write(message.encode())
 			print("Pulse")
-			ptint ("Phase: %f" % phase)
+			print ("Phase: %f" % phase)
 			time1 += cycleLength
 
 
