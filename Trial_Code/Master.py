@@ -38,7 +38,7 @@ strength_tests = [0.7]
 ##epsilon_tests = [0.005, 0.01, 0.02, 0.05, 0.1, 0.3, 0.5] #Range 0 to 1
 epsilon_tests = [0.05]
 #epsilon_tests = [0.005, 0.002, 0.001] #SPECICAL frb version
-epsilon_tests_frb = [0.005]
+epsilon_tests_frb = [0.002]
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
 #gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
@@ -87,7 +87,7 @@ Reachback_info = {'prefix':'frb',
 
 ##method_dicts = [delay_advance_info, perskin_info, MS_info, Reachback_info]
 ##method_dicts = [delay_advance_info] #Only run DA for first tests
-method_dicts = [perskin_info, Reachback_info]
+method_dicts = [Reachback_info]
 #If testing reachback, then help us all
 
 #-------------------------------- File Setup --------------------------------
