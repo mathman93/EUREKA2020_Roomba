@@ -1,3 +1,4 @@
+'''
 import serial
 import time
 import random
@@ -46,6 +47,60 @@ while True:
 				heading += (threshold - phase)
 				time1 -= cycleLength
 				print(heading)
+
+	except KeyboardInterrupt:
+		print("Process Interrupted")
+		break
+
+Xbee.close()
+'''
+
+import serial
+import time
+import random
+from copy import copy
+
+global Xbee
+Xbee = serial.Serial('/dev/ttyUSB0', 115200)
+
+phase = random.randint(0,360)
+threshold = 360
+previousTime = time.time()
+currentTime = time.time()
+heading = int(input("Enter desired heading (integers only)."))
+frequency = 15
+
+while True:
+
+	try:
+	
+		previousTime = copy(currentTime)
+		currentTime = time.time()
+		timeDifference = currentTime - previousTime
+		timer = currentTime - previousTime
+		#phase += timeDifference * 60
+		phase = heading + (timeDifference * frequency)
+
+		if phase >= threshold:
+			phase = 0
+			message = "Received"
+			Xbee.write(message.encode())
+			print("Pulse")
+
+
+		if Xbee.inWaiting() > 0:
+			message = Xbee.read(Xbee.inWaiting()).decode()
+			print(message)
+			if 0 <= phase <= 180:
+				phase -= phase
+			if 180 < phase <= threshold:
+				phase += (threshold - phase)
+		cycleLength = threshold / frequency
+		previousTime = time.time() - (time.time() % cycleLength)
+
+		if phase > threshold:
+			timer = cycleLength
+
 
 	except KeyboardInterrupt:
 		print("Process Interrupted")
