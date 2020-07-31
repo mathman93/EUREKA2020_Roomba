@@ -11,7 +11,7 @@ threshold = 360
 previousTime = time.time()
 currentTime = time.time()
 timer = time.time()
-if time.time() - timer > 1.0
+if time.time() - timer > 1
 	timer += 1.0
 heading = int(input("Enter desired heading: "))
 frequency = 15
@@ -41,9 +41,6 @@ while True:
 				phase += (threshold - phase)
 			phase = heading + (timer * frequency)
 			print(phase)
-
-
-
 
 	except KeyboardInterrupt:
 		print("Process Interrupted")
