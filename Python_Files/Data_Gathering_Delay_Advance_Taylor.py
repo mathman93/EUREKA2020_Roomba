@@ -28,7 +28,7 @@ csvWriter.writerow(['Time Stamp', 'Phase Value', 'Heading', 'Ping?'])
 ## Main Code ##
 time1 = time.time() - (time.time() % CycleTime) # Time reference
 Timer = time.time() - time1
-nodephase = heading + (Timer * frequencey)
+nodephase = heading + (Timer * frequency)
 if nodephase >= threshold:
     time1 += CycleTime
 
