@@ -35,6 +35,9 @@ while True:
 				phase -= phase
 			if 180 < phase <= threshold:
 				phase += (threshold - phase)
+	except KeyboardInterrupt:
+		print("Process Interrupted")
+		break
 
 while True:
 	try:
