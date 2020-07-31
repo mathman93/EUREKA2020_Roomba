@@ -1,4 +1,4 @@
-iimport serial
+import serial
 import time
 import random
 from copy import copy
