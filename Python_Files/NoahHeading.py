@@ -80,7 +80,7 @@ while True:
 		currentTime = time.time()
 		timeDifference = currentTime - previousTime
 		timer = currentTime - previousTime1
-		#phase += timeDifference * 60
+		phase += timeDifference * 60
 		phase = heading + (timeDifference * frequency)
 
 		if phase >= threshold:
