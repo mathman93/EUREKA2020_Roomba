@@ -6,7 +6,6 @@ from copy import copy
 global Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200)
 
-phase = random.randint(0,360)
 threshold = 360
 previousTime = time.time()
 currentTime = time.time()
@@ -15,6 +14,8 @@ if (time.time() - timer) > 1:
 	timer += 1.0
 heading = int(input("Enter desired heading: "))
 frequency = 15
+strength = .6
+phase = heading
 
 while True:
 
@@ -36,9 +37,9 @@ while True:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
 			if 0 <= phase <= 180:
-				phase -= phase
+				heading -= strength * phase
 			if 180 < phase <= threshold:
-				phase += (threshold - phase)
+				heading += strength * (threshold - phase)
 			timer = timeDifference
 			phase = heading + (timer * frequency)
 			print("The heading is")
