@@ -111,12 +111,12 @@ def graph_offset(filepaths):
 
 plt.ioff()
 #Give file path for all the datas that want to plot
-rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_testwith2')
-##rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_938')
-rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_testwith2')
+rp1_path = os.path.join('raspberrypi1', 'raspberrypi1_1146')
+rp2_path = os.path.join('raspberrypi2', 'raspberrypi2_1146')
+rp3_path = os.path.join('raspberrypi3', 'raspberrypi3_1146')
 
 os.system('scp -r pi@192.168.1.14:' + rp1_path + ' raspberrypi1')
-##os.system('scp -r pi@192.168.1.15:' + rp2_path + ' raspberrypi2')
+os.system('scp -r pi@192.168.1.15:' + rp2_path + ' raspberrypi2')
 os.system('scp -r pi@192.168.1.17:' + rp3_path + ' raspberrypi3')
 
 for directory in os.listdir(rp1_path):
@@ -128,22 +128,22 @@ for directory in os.listdir(rp1_path):
     for file in glob.glob(rp1_path + '/' + directory + '/*.csv'):
         rp1_Paths.append(file)
         rp1_Files.append(os.path.basename(file))
-##    rp2_Files = []
-##    rp2_Paths = []
-##    for file in glob.glob(rp2_path + '/' + directory + '/*.csv'):
-##        rp2_Paths.append(file)
-##        rp2_Files.append(os.path.basename(file))
+    rp2_Files = []
+    rp2_Paths = []
+    for file in glob.glob(rp2_path + '/' + directory + '/*.csv'):
+        rp2_Paths.append(file)
+        rp2_Files.append(os.path.basename(file))
     rp3_Files = []
     rp3_Paths = []
     print(rp3_path)
     for file in glob.glob(rp3_path + '/' + directory + '/*.csv'):
         rp3_Paths.append(file)
         rp3_Files.append(os.path.basename(file))
-##    print(rp2_Paths)
+    print(rp2_Paths)
 
 
     #Check to make sure all the same files
-    if rp1_Files == rp3_Files: # == rp2_Files
+    if rp1_Files == rp2_Files == rp3_Files: 
         print('Matching files == good to go!!!')
     else:
         print('Files not match')
@@ -152,8 +152,8 @@ for directory in os.listdir(rp1_path):
     #Loop through all the files
     for j in range(len(rp1_Files)):
         print('Next file')
-        filenames = [rp1_Paths[j], rp3_Paths[j]] #rp2_Paths[j],
+        filenames = [rp1_Paths[j], rp2_Paths[j], rp3_Paths[j]] 
         graph_phase(filenames)
-##        graph_difference(filenames)
+        graph_difference(filenames)
         graph_offset(filenames)
 

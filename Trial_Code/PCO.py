@@ -102,6 +102,9 @@ def init_file(file_prefix, file_path, header):
 #Used to syncronize the start of the ossilators
 #New verison that does not have check sums b/c they mess with the network
 def sync_start(master):
+    #CLEAN THE BUFFER SO THAT THERE IS NO RESISULA DATA
+    if Xbee.inWaiting() > 0:
+        x = Xbee.read(Xbee.inWaiting()).decode()
     #In while loop so can restart if there is a problem
     while True:
         try:
@@ -374,7 +377,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0])
+            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0, 42])
             log_timer += LOG_PERIOD
     #-------- Main Loop End ---------
 
@@ -481,7 +484,7 @@ def M_and_S(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, B): #
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0])
+            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0, 42])
             log_timer += LOG_PERIOD
     #-------- Main Loop End ---------
 
@@ -602,7 +605,7 @@ def Reachback_Firefly(file_prefix, file_path, master, start_phase, REFRACT, EPSI
         
         #Periodic Data Logging
         if current_time >= log_timer:
-            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0])
+            toWrite.append([log_timer, (value / PERIOD) * 360, offset, 0, 42])
             log_timer += LOG_PERIOD
     #-------- Main Loop End ---------
 

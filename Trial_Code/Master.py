@@ -41,7 +41,7 @@ epsilon_tests = [0.3] #Testing the b value
 #NOTE, according to paper, when (number of nodes) * (epsilon) = optimal sync
 #peskin
 #gamma_tests = [1, 3, 5, 8, 10] #Paper have at 1 and 3 -> try similar range
-gamma_tests = [3]
+gamma_tests = [1]
 #M+S
 #b_tests = [1, 3, 5, 8, 10] #Paper have range 0+ to 10
 b_tests = [5]
