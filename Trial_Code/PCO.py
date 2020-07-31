@@ -363,7 +363,7 @@ def peskin(file_prefix, file_path, master, start_phase, REFRACT, EPSILON, GAMMA)
                 try:
                     value = (1/GAMMA)*math.log(C/(C+(f+EPSILON))) * PERIOD #Make sure to rescale to period
                 except:
-                    print(file_prefix, current_time, phase)
+                    print(file_prefix, current_time, value)
                 if value > PERIOD: value = PERIOD
                 offset += value - old_v
 
