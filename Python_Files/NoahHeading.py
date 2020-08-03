@@ -74,6 +74,7 @@ heading = int(input("Enter desired heading: "))
 frequency = 12
 cycleTime = threshold / frequency
 timer = 0
+strength = .7
 
 while True:
 
@@ -97,9 +98,9 @@ while True:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
 			if 0 <= phase <= 180:
-				phase -= phase
+				heading -= strength * phase
 			if 180 < phase <= threshold:
-				phase += (threshold - phase)
+				heading += strength * (threshold - phase)
 
 
 	except KeyboardInterrupt:
