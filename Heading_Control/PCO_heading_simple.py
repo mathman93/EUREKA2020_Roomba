@@ -115,27 +115,33 @@ PCO_start = start #The time the ossilator began
 current_time = start #Used so that first interation of while loop works
 actual_start = start #Uses this value to find if during the refractionary period
 log_timer = start + LOG_PERIOD #The time of the next periodic log
+pinged = False
 #-------- Main Loop ---------
 while PCO_start + DURATION > current_time:
     try:
         #Update value
         current_time = time.time()
-        phase = (current_time - start) * CONVERSION_FACTOR + heading #Set the phase
+        phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360 #Set the phase
         #Remember to convert the time to phase equivalent (eg change from 0-PERIOD sec -> 0-360 deg)
 
         #Check if need to pulse and then send pulse
-        if phase >= 360:
+        if ((current_time - start) * CONVERSION_FACTOR + heading) >= 360 and not pinged:
             Xbee.write(str(1).encode())
+            pinged = True
             #Write info
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, 360, heading, 1])
             toWrite.append([current_time, 0, heading, 0])
             #Reset start, log_timer, offset, and value
             start += PERIOD
-            actual_start = current_time #Uses this value to find if during the refractionary period
 ##            offset = 0
 ##            value = 0 #Insures that change_phase and log_timer work
-            phase = heading
+            
+
+        #Reset the timer
+        if (current_time - start) * CONVERSION_FACTOR >= 360:
+            start += PERIOD
+            phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
@@ -143,7 +149,7 @@ while PCO_start + DURATION > current_time:
         inWait = Xbee.inWaiting()
         if inWait > 0:
             Xbee.read(inWait)
-            if current_time >= REFRACT + actual_start:
+            if current_time >= REFRACT + start:
                 #Note - this will read all the pulses send to the serial port since the last
                 #call of the loop, which maybe more than one. This is simply a risk that is taken
                 #However, its exsistence is noted
@@ -160,11 +166,8 @@ while PCO_start + DURATION > current_time:
                     delta = STRENGTH * -phase
                 else:
                     delta = STRENGTH * (360 - phase)
-                phase -= heading #This is so if have to modify heading, then everything will work out
-                heading += delta 
-                if heading > 360: heading -= 360
-                elif heading < 0: heading += 360 #Loop around to make heading matchs
-                phase += heading
+                heading += delta
+                phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360 #Set the phase
 
     #-----END PHASE RESPONSE ------
 
