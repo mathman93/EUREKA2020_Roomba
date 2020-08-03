@@ -83,7 +83,7 @@ while True:
 		currentTime = time.time()
 		timer += currentTime - previousTime
 		timeDifference = currentTime - previousTime
-		phase += heading + (timer * frequency)
+		phase = heading + (timer * frequency)
 
 		if phase >= threshold:
 			timer -= cycleTime
