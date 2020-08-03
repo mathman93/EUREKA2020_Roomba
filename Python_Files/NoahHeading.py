@@ -92,12 +92,12 @@ while True:
 			message = "Received"
 			Xbee.write(message.encode())
 			print("Pulse")
-			print(phase)
 
 
 		if Xbee.inWaiting() > 0:
 			message = Xbee.read(Xbee.inWaiting()).decode()
 			print(message)
+			print(phase)
 			if 0 <= phase <= 180:
 				heading -= strength * phase
 			if 180 < phase <= threshold:
