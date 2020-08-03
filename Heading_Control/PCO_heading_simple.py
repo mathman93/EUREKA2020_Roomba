@@ -141,6 +141,9 @@ while PCO_start + DURATION > current_time:
             pinged = False
             start += PERIOD
             phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360
+            #In order to keep heading restricted, subtract 360 if heading > 360
+            if heading > 360:
+                heading -= 360
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
