@@ -73,6 +73,7 @@ currentTime = time.time()
 heading = int(input("Enter desired heading: "))
 frequency = 12
 cycleTime = threshold / frequency
+timer = 0
 
 while True:
 
@@ -85,7 +86,7 @@ while True:
 		phase += heading + (timer * frequency)
 
 		if phase >= threshold:
-			timer = cycleTime
+			timer -= cycleTime
 			phase = 0
 			message = "Received"
 			Xbee.write(message.encode())
