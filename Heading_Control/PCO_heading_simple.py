@@ -132,8 +132,6 @@ while PCO_start + DURATION > current_time:
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, 360, heading, 1])
             toWrite.append([current_time, 0, heading, 0])
-            #Reset start, log_timer, offset, and value
-            start += PERIOD
 ##            offset = 0
 ##            value = 0 #Insures that change_phase and log_timer work
             
