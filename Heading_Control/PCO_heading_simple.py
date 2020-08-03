@@ -147,7 +147,7 @@ while PCO_start + DURATION > current_time:
         inWait = Xbee.inWaiting()
         if inWait > 0:
             Xbee.read(inWait)
-            if current_time >= REFRACT + start:
+            if current_time >= 0:
                 #Note - this will read all the pulses send to the serial port since the last
                 #call of the loop, which maybe more than one. This is simply a risk that is taken
                 #However, its exsistence is noted
