@@ -23,7 +23,7 @@ def sync_start(): #Used to sync the starting times of nodes
     if input('Master?'): #If input something, then master
         #It will send a pulse to other nodes of the start time of ossilation
         start_dt = input('Start When?')
-        try:s
+        try:
             x = int(start_dt)
             start = int(time.time()) + x
             print('Starts in ' + str(start_dt))
