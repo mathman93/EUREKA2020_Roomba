@@ -23,7 +23,7 @@ def sync_start(): #Used to sync the starting times of nodes
     if input('Master?'): #If input something, then master
         #It will send a pulse to other nodes of the start time of ossilation
         start_dt = input('Start When?')
-        try:
+        try:s
             x = int(start_dt)
             start = int(time.time()) + x
             print('Starts in ' + str(start_dt))
@@ -121,29 +121,25 @@ while PCO_start + DURATION > current_time:
     try:
         #Update value
         current_time = time.time()
-        phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360 #Set the phase
+        phase = ((current_time - start) * CONVERSION_FACTOR + heading) #Set the phase
         #Remember to convert the time to phase equivalent (eg change from 0-PERIOD sec -> 0-360 deg)
 
         #Check if need to pulse and then send pulse
-        if ((current_time - start) * CONVERSION_FACTOR + heading) >= 360 and not pinged:
+        if phase >= 360:
             Xbee.write(str(1).encode())
             pinged = True
             #Write info
             #Store both the top and bottom of a ping for better graphs
             toWrite.append([current_time, 360, heading, 1])
             toWrite.append([current_time, 0, heading, 0])
+
+            if heading > 360:
+                heading -= 360
+            start = current_time + (1/CONVERSION_FACTOR) * heading
+            phase = ((current_time - start) * CONVERSION_FACTOR + heading)
 ##            offset = 0
 ##            value = 0 #Insures that change_phase and log_timer work
             
-
-        #Reset the timer
-        if current_time - start >= PERIOD:
-            pinged = False
-            start += PERIOD
-            phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360
-            #In order to keep heading restricted, subtract 360 if heading > 360
-            if heading > 360:
-                heading -= 360
 
 
         #Check for signals on the line -> if there is either end loop b/c synced
@@ -169,7 +165,7 @@ while PCO_start + DURATION > current_time:
                 else:
                     delta = STRENGTH * (360 - phase)
                 heading += delta
-                phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360 #Set the phase
+                phase = ((current_time - start) * CONVERSION_FACTOR + heading)
 
     #-----END PHASE RESPONSE ------
 
