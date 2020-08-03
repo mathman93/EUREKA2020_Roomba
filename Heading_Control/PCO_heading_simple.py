@@ -135,6 +135,8 @@ while PCO_start + DURATION > current_time:
 
             if heading > 360:
                 heading -= 360
+            if heading < 0:
+                heading += 360
             start = current_time + (1/CONVERSION_FACTOR) * heading
             phase = ((current_time - start) * CONVERSION_FACTOR + heading)
 ##            offset = 0
