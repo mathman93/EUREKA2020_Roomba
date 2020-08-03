@@ -11,7 +11,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-STRENGTH = .3 #Coe used with function to determine coupling strength?
+STRENGTH = .7 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 CONVERSION_FACTOR = 360 / PERIOD #Multiply by the time in order to find degs
 #eg value => phase OR seconds => degrees
