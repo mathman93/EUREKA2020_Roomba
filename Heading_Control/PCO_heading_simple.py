@@ -139,7 +139,7 @@ while PCO_start + DURATION > current_time:
             
 
         #Reset the timer
-        if (current_time - start) * CONVERSION_FACTOR >= 360:
+        if current_time - start >= PERIOD:
             pinged = False
             start += PERIOD
             phase = ((current_time - start) * CONVERSION_FACTOR + heading) % 360
