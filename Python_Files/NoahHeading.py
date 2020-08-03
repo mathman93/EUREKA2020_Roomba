@@ -92,6 +92,7 @@ while True:
 			message = "Received"
 			Xbee.write(message.encode())
 			print("Pulse")
+			print(phase)
 
 
 		if Xbee.inWaiting() > 0:
