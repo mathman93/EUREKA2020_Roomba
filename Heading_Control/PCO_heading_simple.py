@@ -11,7 +11,7 @@ from random import uniform
 LOG_PERIOD = .01 #Time between when to log data
 PERIOD = 2 #Time in seconds for each Ossilation
 HALF_PERIOD = PERIOD/2
-STRENGTH = .3 #Coe used with function to determine coupling strength?
+STRENGTH = .7 #Coe used with function to determine coupling strength?
 REFRACT = 0 #Time before listen more signals
 CONVERSION_FACTOR = 360 / PERIOD #Multiply by the time in order to find degs
 #eg value => phase OR seconds => degrees
@@ -51,8 +51,11 @@ def sync_start(): #Used to sync the starting times of nodes
 # ---- Init ----
 
 #Get some starting information
+#This insures that all the files will have same name when trying to graph
+file_sufix = input('Enter file sufix: ')
 if input('Sync start?'):
     ss = True
+    #Set heading
     try:
         head = float(input('Beginning Heading?'))
         if 0 <= head <= 360:
@@ -62,6 +65,12 @@ if input('Sync start?'):
     except:
         print('Giving random val')
         head = uniform(0,360)
+    #Set duration
+    try:
+        DURATION = int(input('Duration? '))
+    except:
+        print('Duration set to 20 secs')
+        DURATION = 20
 else:
     print('Note, skipping sync start WILL cause headings not to sync\n You have been warned')
     head = uniform(0,360)
@@ -72,8 +81,7 @@ global Xbee # Specifies connection to Xbee
 Xbee = serial.Serial('/dev/ttyUSB0', 115200) # Baud rate should be 115200
 
 #Data file creation and such
-fname = socket.gethostname() + '_' + 'DA' + '_' + time.strftime("%b%d%Y_%H%M%S", time.gmtime()) + '.csv'
-#That time format is stolen from Xbee_Read_Test ;)
+fname = socket.gethostname() + '_' + file_sufix + '.csv'
 #Write files to non-github localtion on pis
 path = os.path.join('..', '..', 'PCO_Data', fname)
 file = open(path, 'w', newline='')
@@ -102,10 +110,12 @@ heading = head #Used to store the 'heading' of an node -> only works with sync_s
 #ABOVE HERE, SPEED IS NOT A CONCERN, HOWEVER GOING FORWARD IS SUPOSED TO BE FAST
 
 start = time.time() #+ heading * (1/CONVERSION_FACTOR)#The start time of the current cycle
+PCO_start = start #The time the ossilator began
+current_time = start #Used so that first interation of while loop works
 actual_start = start #Uses this value to find if during the refractionary period
 log_timer = start + LOG_PERIOD #The time of the next periodic log
 #-------- Main Loop ---------
-while True:
+while PCO_start + DURATION > current_time:
     try:
         #Update value
         current_time = time.time()
@@ -122,7 +132,6 @@ while True:
             #Reset start, log_timer, offset, and value
             start = current_time + heading * (1/CONVERSION_FACTOR) #Its starting in the future, idiot (not the past)
             actual_start = current_time #Uses this value to find if during the refractionary period
-            log_timer = start + LOG_PERIOD
 ##            offset = 0
 ##            value = 0 #Insures that change_phase and log_timer work
             phase = heading
@@ -177,8 +186,8 @@ if input('Wait to print out firing times and heading values?'):
     for line in toWrite:
         if line[3]:
             print(line[0], ' ', line[2])
-if input('Keep Data?'):
-    file.close()
+##if input('Keep Data?'):
+##    file.close()
 Xbee.close()
 
 
