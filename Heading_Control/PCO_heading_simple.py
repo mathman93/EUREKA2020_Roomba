@@ -160,7 +160,7 @@ while PCO_start + DURATION > current_time:
                 Type = Delay-Advance
                 Form = Wang Optimal Simple
                 '''
-                if phase <= 180 and False:
+                if phase <= 180:
                     delta = STRENGTH * -phase
                 else:
                     delta = STRENGTH * (360 - phase)
