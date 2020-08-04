@@ -17,6 +17,8 @@ import glob
 
 #Graphs phase over time
 def graph_phase(filepaths):
+    plt.xlabel('Time (s)')
+    plt.ylabel('Phase') 
     colors = ['r', 'b', 'g']
     i = 0
     for fm in filepaths:
@@ -24,14 +26,17 @@ def graph_phase(filepaths):
             reader = csv.reader(f, delimiter=',')
             x = []
             y = []
+            start = None #The start time of the ossilator (ei first record time)
             for row in reader:
                 try:
-                    x.append(float(row[0]))
+                    if not start:
+                        start = float(row[0])
+                    x.append(float(row[0]) - start)
                     y.append(float(row[1]))
                 except:
                     pass
                 if row[3] == str(1):
-                    plt.plot(float(row[0]), float(row[1]), marker='o')
+                    plt.plot(float(row[0]) - start, float(row[1]), marker='o')
             plt.plot(x,y,colors[i])
             i += 1
 
@@ -43,6 +48,8 @@ def graph_phase(filepaths):
 def graph_difference(filepaths):
     #Theory, all recorded times should line up b/c sync start -> do not include non-periodic stuff
     #Now pull all the data from the files and sort out the non-periodic measurement stuff
+    plt.xlabel('Time (s)')
+    plt.ylabel('Phase Difference') 
     all_data = [] #3d list with all the data times and phases
     for file in filepaths:
         current_data = []
@@ -60,12 +67,15 @@ def graph_difference(filepaths):
     #Calculate the smallest arc for each recorded time
     arc_lengths = [] #Arc_length
     times = [] #Times
+    start = None
     for index in range(len(all_data[0])-5): # -5 to prevent weird stuff
         #Put the data for the same time in a list, which then used to calc stuff
         current_info = []
         for data in all_data:
             current_info.append(data[index]) #Add tuples that SHOULD have same time to the current_info
-        times.append(float(current_info[0][0]))
+        if not start:
+            start = float(current_info[0][0]) #Expression for time?
+        times.append(float(current_info[0][0]) - start)
         current_phases = []
         for i in range(len(current_info)):
             current_phases.append(float(current_info[i][1]))

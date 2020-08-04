@@ -121,5 +121,6 @@ for fm in filenames:
             plt.plot(x,y,colors[i])
             i += 1
 
+plt.savefig(os.path.basename(filenames[0]).replace('.csv', '') + 'heading.svg', bbox_inches='tight')
 plt.show()
 
