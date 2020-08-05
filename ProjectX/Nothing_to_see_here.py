@@ -49,8 +49,9 @@ def sync_start(): #Used to sync the starting times of nodes
                 start = int(Xbee.read(Xbee.inWaiting()).decode())
                 print('Start in ' + str(start - int(time.time())))
                 break
-        while time.time() < start:
-            pass
+        while time.time() < start: #Keep the buffer empty
+            if Xbee.inWaiting() > 0:
+                Xbee.read(Xbee.inWaiting())
     print('Start')
 
 # ---- Init ----
@@ -158,6 +159,8 @@ while PCO_start + DURATION > current_time:
             #In order to keep heading restricted, subtract 360 if heading > 360
             if heading > 360:
                 heading -= 360
+            if heading < 0:
+                heading += 360
 
         #Check for signals on the line -> if there is either end loop b/c synced
         #OR if not during refraction, then phase shift
@@ -183,7 +186,7 @@ while PCO_start + DURATION > current_time:
                         delta = STRENGTH * (360 - timer_phase)
                     offset += delta
                     timer_phase += delta
-                    heading_phase += delta
+                    heading_phase = (timer_phase + heading) % 360
 
                 else:
                     #Just adjust the heading as you would normally
@@ -197,7 +200,7 @@ while PCO_start + DURATION > current_time:
                     else:
                         delta = STRENGTH * (360 - heading_phase)
                     heading += delta
-                    heading_phase += delta
+                    heading_phase = (timer_phase + heading) % 360
 
     #-----END PHASE RESPONSE ------
 
