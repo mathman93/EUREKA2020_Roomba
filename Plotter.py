@@ -139,7 +139,9 @@ if old_way == True:
                     
 
 print(filenames)
-                     
+
+plt.xlabel('Time (s)')
+plt.ylabel('Phase')              
 colors = ['r', 'b', 'y', 'c', 'm', 'g']
 i = 0
 for fm in filenames:
@@ -148,19 +150,22 @@ for fm in filenames:
             reader = csv.reader(f, delimiter=',')
             x = []
             y = []
+            start = None #The start time of the ossilator (ei first record time)
             for row in reader:
                 try:
-                    x.append(float(row[0]))
+                    if not start:
+                        start = float(row[0])
+                    x.append(float(row[0]) - start)
                     y.append(float(row[1]))
                 except:
                     print('Help')
                 #Graph phase value
                 if row[3] == str(1):
-                    plt.plot(float(row[0]), float(row[1]), marker='o', color='g')
+                    plt.plot(float(row[0]) - start, float(row[1]), marker='o', color='g')
                 #Graph timer pulses
                 try:
                     if row[5] == str(1):
-                        plt.plot(float(row[0]), float(row[4]), marker='o', color='m')
+                        plt.plot(float(row[0]) - start, float(row[4]), marker='o', color='m')
                 except:
                     pass
             plt.plot(x,y,colors[i])

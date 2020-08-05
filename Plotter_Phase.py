@@ -101,7 +101,10 @@ if ans != 'y':
        
 
 print(filenames)
-                     
+
+plt.xlabel('Time (s)')
+plt.ylabel('Heading')
+plt.ylim(0,360)
 colors = ['r', 'b', 'g', 'c', 'm', 'y']
 i = 0
 for fm in filenames:
@@ -110,14 +113,19 @@ for fm in filenames:
             reader = csv.reader(f, delimiter=',')
             x = []
             y = []
+            start = None #The start time of the ossilator (ei first record time)
             for row in reader:
                 try:
-                    x.append(float(row[0]))
-                    y.append(float(row[2]))
+                    if not start:
+                        start = float(row[0])
+                    x.append(float(row[0]) - start)
+                    z = float(row[2]) #Cheat to get ride of those peskin negatives
+                    if z < 0: z += 360
+                    y.append(z)
                 except:
                     print('Help')
                 if row[3] == str(1):
-                    plt.plot(float(row[0]), float(row[2]), marker='o')
+                    plt.plot(float(row[0]) - start, float(row[2]), marker='o')
             plt.plot(x,y,colors[i])
             i += 1
 
